@@ -518,22 +518,62 @@ const L1={
   {id:"x6",de:"Mein Vorname ist Anna und mein Familienname ist Nowak. Ich komme aus der Schweiz. Und woher kommst du?",fr:"Mon prénom est Anna et mon nom de famille est Nowak. Je viens de Suisse. Et toi, d’où viens-tu ?"}
  ],
  hoer:[
-  {id:"h1",fr:"Deux personnes font connaissance",de:"Zwei Personen lernen sich kennen.",lines:[["M","Guten Tag. Mein Name ist Brandt."],["F","Guten Tag, Herr Brandt. Ich bin Anna Keller."],["M","Woher kommen Sie, Frau Keller?"],["F","Ich komme aus der Schweiz. Und Sie?"],["M","Ich komme aus Deutschland."]],
-   tasks:[{k:"rf",q:"Frau Keller kommt aus Österreich.",a:false},{k:"rf",q:"Herr Brandt kommt aus Deutschland.",a:true},{k:"mc",q:"Wie heißt die Frau?",a:"Anna Keller",o:["Anna Brandt","Lena Keller"]},{k:"mc",q:"Die zwei Personen sagen …",a:"Sie.",o:["du."]}]},
-  {id:"h2",fr:"Un homme épelle son nom",de:"Ein Mann buchstabiert den Namen.",lines:[["F","Wie heißen Sie, bitte?"],["M","Mein Name ist Nowak."],["F","Wie bitte?"],["M","Nowak. Ich buchstabiere: N, O, W, A, K."],["F","Danke, Herr Nowak. Und woher kommen Sie?"],["M","Ich komme aus Österreich."]],
-   tasks:[{k:"fill",q:"Der Familienname: ___",a:["Nowak"]},{k:"mc",q:"Woher kommt Herr Nowak?",a:"Aus Österreich.",o:["Aus Deutschland.","Aus der Schweiz."]},{k:"rf",q:"Der Mann buchstabiert den Namen.",a:true},{k:"rf",q:"Der Mann heißt Brandt.",a:false}]},
-  {id:"h3",fr:"Trois amis se saluent",de:"Drei Freunde sagen Hallo.",lines:[["F","Hallo Jonas! Wie geht’s?"],["M","Hallo Lena! Danke, sehr gut. Und dir?"],["F","Es geht. Wer ist das?"],["M","Das ist Malik. Er kommt aus Frankreich."],["F","Hallo Malik! Ich bin Lena. Ich komme aus Österreich."]],
-   tasks:[{k:"mc",q:"Wie geht es Jonas?",a:"Sehr gut.",o:["Es geht.","Nicht so gut."]},{k:"mc",q:"Wie geht es Lena?",a:"Es geht.",o:["Sehr gut.","Nicht so gut."]},{k:"fill",q:"Malik kommt aus ___.",a:["Frankreich"]},{k:"rf",q:"Lena kommt aus Deutschland.",a:false}]},
-  {id:"h4",fr:"Une femme présente trois personnes",de:"Eine Frau stellt drei Personen vor.",lines:[["F","Guten Abend. Ich heiße Amira Yilmaz. Amira ist mein Vorname und Yilmaz ist mein Familienname. Ich komme aus der Türkei."],["F","Das ist Herr Weber. Er kommt aus der Schweiz."],["F","Und das ist Frau Delgado. Sie kommt aus Spanien."]],
-   tasks:[{k:"zu",p:[["Amira Yilmaz","die Türkei"],["Herr Weber","die Schweiz"],["Frau Delgado","Spanien"]]},{k:"fill",q:"Der Vorname: ___",a:["Amira"]},{k:"rf",q:"Es ist Morgen.",a:false}]}
-  ,{id:"h5",fr:"Deux adultes se saluent le matin",de:"Zwei Personen am Morgen.",lines:[["M","Guten Morgen, Frau Keller. Wie geht es Ihnen?"],["F","Danke, sehr gut, Herr Weber. Und Ihnen?"],["M","Es geht. Frau Keller, woher kommen Sie? Aus der Schweiz?"],["F","Nein, ich komme nicht aus der Schweiz. Ich komme aus Österreich. Und Sie?"],["M","Ich komme aus Deutschland."]],
-   tasks:[{k:"rf",q:"Frau Keller kommt aus der Schweiz.",a:false},{k:"mc",q:"Herr Weber sagt:",a:"Es geht.",o:["Sehr gut.","Nicht so gut."]},{k:"rf",q:"Frau Keller und Herr Weber sagen „du“.",a:false},{k:"fill",q:"Herr Weber kommt aus ___.",a:["Deutschland"]}]},
-  {id:"h6",seg:1,fr:"Cinq personnes se présentent, une question par personne",de:"Im Deutschkurs: fünf Personen.",tasks:[
+  /* ----- Dialogues courts ----- */
+  {id:"k1",cat:"k",fr:"Deux jeunes font connaissance pendant un concert",de:"Im Konzert: Zwei Personen lernen sich kennen.",
+   lines:[["M","Hallo! Die Musik ist super, oder?"],["F","Ja, super! Und wer bist du?"],["M","Ich heiße Malik. Und du? Wie heißt du?"],["F","Ich bin Lena."],["M","Wie bitte?"],["F","Lena! Hallo, Malik!"]],
+   tasks:[{k:"mc",q:"Wie heißt die Frau?",a:"Lena",o:["Malika","Elena"]},{k:"rf",q:"Die zwei Personen sagen „du“.",a:true},{k:"rf",q:"Der Mann heißt Lena.",a:false}]},
+  {id:"k2",cat:"k",fr:"Deviner le pays de l’autre",de:"Woher kommst du?",
+   lines:[["F","Woher kommst du, Jonas? Aus Deutschland?"],["M","Nein, nicht aus Deutschland."],["F","Aus Österreich?"],["M","Nein. Ich komme aus der Schweiz."],["F","Ah, aus der Schweiz!"],["M","Und du? Nein, Moment! Du kommst aus Spanien, oder?"],["F","Nein, nein. Ich komme aus Mexiko."]],
+   tasks:[{k:"mc",q:"Woher kommt Jonas?",a:"Aus der Schweiz.",o:["Aus Deutschland.","Aus Österreich."]},{k:"fill",q:"Die Frau kommt aus ___.",a:["Mexiko"]},{k:"rf",q:"Jonas kommt aus Österreich.",a:false}]},
+  {id:"k3",cat:"k",fr:"Deux amis se demandent comment ça va",de:"Wie geht’s?",
+   lines:[["F","Hallo Paul! Wie geht’s?"],["M","Hallo Amira! Danke, sehr gut. Und dir?"],["F","Ach, nicht so gut."],["M","Oh! Nicht so gut?"],["F","Nein. Aber danke, Paul."]],
+   tasks:[{k:"mc",q:"Wie geht es Paul?",a:"Sehr gut.",o:["Es geht.","Nicht so gut."]},{k:"mc",q:"Wie geht es Amira?",a:"Nicht so gut.",o:["Gut.","Sehr gut."]},{k:"rf",q:"Paul und Amira sagen „Sie“.",a:false}]},
+  {id:"k4",cat:"k",fr:"Au cours d’allemand, la professeure demande un nom",de:"Im Deutschkurs: Wie heißen Sie?",
+   lines:[["F","Guten Morgen! Wie heißen Sie, bitte?"],["M","Guten Morgen. Mein Name ist Demir."],["F","Und der Vorname?"],["M","Tarik. Ich heiße Tarik Demir."],["F","Danke, Herr Demir. Ich bin Frau Vogel."]],
+   tasks:[{k:"fill",q:"Der Vorname: ___",a:["Tarik"]},{k:"fill",q:"Der Familienname: ___",a:["Demir"]},{k:"mc",q:"Wie heißt die Frau?",a:"Frau Vogel",o:["Frau Demir","Frau Keller"]},{k:"rf",q:"Es ist Abend.",a:false}]},
+  {id:"k5",cat:"k",fr:"Un ami présente deux personnes",de:"Das ist Carla. Und das ist Nina.",
+   lines:[["M","Jonas, das ist Carla. Und das ist Nina."],["M2","Hallo Carla! Hallo Nina! Ich bin Jonas. Woher kommst du, Carla?"],["F","Ich komme aus Italien."],["M2","Und du, Nina? Kommst du auch aus Italien?"],["F2","Nein, ich komme aus Polen."]],
+   tasks:[{k:"zu",p:[["Carla","Italien"],["Nina","Polen"]]},{k:"mc",q:"Wer fragt: „Woher kommst du?“",a:"Jonas",o:["Carla","Nina"]}]},
+  {id:"k6",cat:"k",fr:"Deux adultes se saluent et se quittent le soir",de:"Guten Abend und auf Wiedersehen.",
+   lines:[["M","Guten Abend, Frau Keller! Wie geht es Ihnen?"],["F","Guten Abend, Herr Brandt. Danke, gut. Und Ihnen?"],["M","Auch gut, danke."],["F","Tja, also dann: Auf Wiedersehen, Herr Brandt!"],["M","Auf Wiedersehen, Frau Keller! Gute Nacht!"]],
+   tasks:[{k:"rf",q:"Es ist Morgen.",a:false},{k:"mc",q:"Wie geht es Frau Keller?",a:"Gut.",o:["Sehr gut.","Nicht so gut."]},{k:"rf",q:"Die zwei Personen sagen „Sie“.",a:true}]},
+  /* ----- Dialogues longs : une écoute entière, puis des extraits ----- */
+  {id:"l1",cat:"l",fr:"Dans la rue : Lena présente son ami Malik à Frau Vogel",de:"Auf der Straße: Lena, Malik und Frau Vogel.",
+   lines:[["F","Guten Tag, Frau Vogel!"],["F2","Ja, hallo, Lena! Wie geht’s?"],["F","Danke, gut. Und wie geht es Ihnen?"],["F2","Auch gut, danke."],["F","Ähm, ach ja: Das ist Malik. Malik, das ist Frau Vogel."],["M","Guten Tag, Frau Vogel."],["F2","Guten Tag, Herr … ähm … Wie heißen Sie?"],["M","Benali. Malik Benali."],["F2","Benali? Woher kommen Sie, Herr Benali? Aus Italien?"],["M","Nein, ich …"],["F","Er kommt aus Frankreich, Frau Vogel."],["F2","Ah, aus Frankreich! Und du, Lena? Du kommst aus Deutschland, oder?"],["F","Nein, nein. Ich komme aus Österreich."],["F2","Ach ja, richtig! Aus Österreich."],["F2","Tja, also dann. Auf Wiedersehen, Herr Benali!"],["M","Auf Wiedersehen, Frau Vogel!"],["F2","Tschüs, Lena!"],["F","Tschüs!"]],
+   tasks:[{k:"rf",q:"Malik und Frau Vogel sagen „du“.",a:false},{k:"rf",q:"Lena kommt aus Österreich.",a:true},
+    {k:"mc",q:"Wie geht es Frau Vogel?",a:"Gut.",o:["Es geht.","Nicht so gut."],lines:[["F2","Ja, hallo, Lena! Wie geht’s?"],["F","Danke, gut. Und wie geht es Ihnen?"],["F2","Auch gut, danke."]]},
+    {k:"fill",q:"Der Familienname: ___",a:["Benali"],lines:[["M","Guten Tag, Frau Vogel."],["F2","Guten Tag, Herr … ähm … Wie heißen Sie?"],["M","Benali. Malik Benali."]]},
+    {k:"mc",q:"Woher kommt Malik?",a:"Aus Frankreich.",o:["Aus Italien.","Aus Österreich."],lines:[["F2","Benali? Woher kommen Sie, Herr Benali? Aus Italien?"],["M","Nein, ich …"],["F","Er kommt aus Frankreich, Frau Vogel."]]},
+    {k:"mc",q:"Frau Vogel sagt zu Malik:",a:"Auf Wiedersehen.",o:["Tschüs.","Gute Nacht."],lines:[["F2","Tja, also dann. Auf Wiedersehen, Herr Benali!"],["M","Auf Wiedersehen, Frau Vogel!"],["F2","Tschüs, Lena!"],["F","Tschüs!"]]}]},
+  {id:"l2",cat:"l",fr:"Premier jour au cours d’allemand : la professeure et trois élèves",de:"Im Deutschkurs: der erste Tag.",
+   lines:[["F","Guten Morgen! Ich bin Frau Keller. Und wer sind Sie?"],["M","Guten Morgen. Mein Name ist Demir. Tarik Demir."],["F","Wie bitte? Demir?"],["M","Ja. Ich buchstabiere: D, E, M, I, R."],["F","Danke, Herr Demir. Woher kommen Sie?"],["M","Ich komme aus der Türkei."],["F","Aha. Und Sie? Wie heißen Sie?"],["F2","Ich heiße Carla Rossi. Ich komme aus Italien."],["F","Und das ist …?"],["F2","Das ist Jonas. Er kommt auch aus Italien."],["M2","Nein, nein! Ich komme nicht aus Italien. Ich komme aus der Schweiz."],["F2","Oh, Entschuldigung!"],["F","Gut, danke. Und wie geht es Ihnen?"],["M2","Sehr gut, danke!"],["M","Es geht."]],
+   tasks:[{k:"zu",p:[["Tarik Demir","die Türkei"],["Carla Rossi","Italien"],["Jonas","die Schweiz"]]},{k:"rf",q:"Die Lehrerin heißt Frau Keller.",a:true},
+    {k:"fill",q:"Der Familienname: ___",a:["Demir"],lines:[["M","Guten Morgen. Mein Name ist Demir. Tarik Demir."],["F","Wie bitte? Demir?"],["M","Ja. Ich buchstabiere: D, E, M, I, R."]]},
+    {k:"rf",q:"Jonas kommt aus Italien.",a:false,lines:[["F2","Das ist Jonas. Er kommt auch aus Italien."],["M2","Nein, nein! Ich komme nicht aus Italien. Ich komme aus der Schweiz."],["F2","Oh, Entschuldigung!"]]},
+    {k:"mc",q:"Wie geht es Tarik?",a:"Es geht.",o:["Sehr gut.","Nicht so gut."],lines:[["F","Gut, danke. Und wie geht es Ihnen?"],["M2","Sehr gut, danke!"],["M","Es geht."]]}]},
+  /* ----- Présentations ----- */
+  {id:"a1",cat:"a",seg:1,fr:"Cinq personnes se présentent, une question par personne",de:"Im Deutschkurs: Fünf Personen stellen sich vor.",tasks:[
     {k:"mc",q:"Woher kommt Lena?",a:"Aus Österreich.",o:["Aus Deutschland.","Aus der Schweiz."],lines:[["F","Hallo! Ich heiße Lena Keller. Lena ist mein Vorname. Ich komme aus Österreich."]]},
     {k:"rf",q:"Jonas Brandt kommt aus Österreich.",a:false,lines:[["M","Guten Tag. Mein Name ist Brandt, Jonas Brandt. Ich komme nicht aus Österreich. Ich komme aus Deutschland."]]},
-    {k:"fill",q:"Der Familienname: ___",a:["Yilmaz"],lines:[["F","Ich bin Amira. Mein Familienname ist Yilmaz. Ich buchstabiere: Y, I, L, M, A, Z. Ich komme aus der Türkei."]]},
-    {k:"mc",q:"Woher kommt Frau Delgado?",a:"Aus Spanien.",o:["Aus Österreich.","Aus Mexiko."],lines:[["M","Ich bin Herr Nowak. Ich komme aus Österreich. Und das ist Frau Delgado. Woher kommen Sie, Frau Delgado?"],["F","Ich komme aus Spanien."]]},
-    {k:"mc",q:"Wie geht es Malik?",a:"Nicht so gut.",o:["Es geht.","Sehr gut."],lines:[["F","Hallo Malik, wie geht’s?"],["M","Nicht so gut. Und dir, Lena?"],["F","Es geht."]]}]}
+    {k:"fill",q:"Der Familienname: ___",a:["Yilmaz"],lines:[["F2","Ich bin Amira. Mein Familienname ist Yilmaz. Ich buchstabiere: Y, I, L, M, A, Z. Ich komme aus der Türkei."]]},
+    {k:"mc",q:"Woher kommt Frau Delgado?",a:"Aus Spanien.",o:["Aus Österreich.","Aus Mexiko."],lines:[["M2","Ich bin Herr Nowak. Ich komme aus Österreich. Und das ist Frau Delgado. Woher kommen Sie, Frau Delgado?"],["F","Ich komme aus Spanien."]]},
+    {k:"mc",q:"Wie geht es Malik?",a:"Nicht so gut.",o:["Es geht.","Sehr gut."],lines:[["F","Hallo Malik, wie geht’s?"],["M","Nicht so gut. Und dir, Lena?"],["F","Es geht."]]}]},
+  {id:"a2",cat:"a",fr:"Une femme se présente, puis présente deux personnes",de:"Eine Frau stellt drei Personen vor.",
+   lines:[["F","Guten Abend. Ich heiße Amira Yilmaz. Amira ist mein Vorname und Yilmaz ist mein Familienname. Ich komme aus der Türkei."],["F","Das ist Herr Weber. Er kommt aus der Schweiz."],["F","Und das ist Frau Delgado. Sie kommt aus Spanien."]],
+   tasks:[{k:"zu",p:[["Amira Yilmaz","die Türkei"],["Herr Weber","die Schweiz"],["Frau Delgado","Spanien"]]},{k:"fill",q:"Der Vorname: ___",a:["Amira"]},{k:"rf",q:"Es ist Morgen.",a:false}]},
+  /* ----- Noms épelés ----- */
+  {id:"z1",cat:"z",seg:1,fr:"Cinq personnes épellent un nom : écris-le ou choisis la bonne écriture",de:"Wie bitte? Ich buchstabiere.",tasks:[
+    {k:"fill",q:"Der Familienname: ___",a:["Vogel"],lines:[["F","Mein Name ist Sabine Vogel."],["M","Wie bitte?"],["F","Vogel. Ich buchstabiere: V, O, G, E, L."]]},
+    {k:"mc",q:"Der Familienname:",a:"Weiß",o:["Weis","Waiß"],lines:[["M","Ich heiße Jürgen Weiß."],["F","Wie bitte?"],["M","Moment, ich buchstabiere: W, E, I, ß."]]},
+    {k:"mc",q:"Der Name:",a:"Frau Jäger",o:["Frau Jeger","Frau Jager"],lines:[["F2","Ich bin Frau Jäger."],["M","Wie bitte?"],["F2","Jäger: J, Ä, G, E, R."]]},
+    {k:"fill",q:"Der Vorname: ___",a:["Yusuf"],lines:[["M2","Mein Vorname ist Yusuf."],["F","Wie bitte?"],["M2","Yusuf. Ich buchstabiere: Y, U, S, U, F."]]},
+    {k:"mc",q:"Der Familienname:",a:"Köhler",o:["Kohler","Köler"],lines:[["F","Guten Tag. Mein Name ist Köhler."],["M","Entschuldigung, wie bitte?"],["F","Köhler: K, Ö, H, L, E, R."]]}]},
+  {id:"z2",cat:"z",seg:1,fr:"Un mot de la leçon est épelé : choisis la bonne écriture",de:"Welches Wort hören Sie?",tasks:[
+    {k:"mc",q:"Das Wort:",a:"Schweiz",o:["Schwiez","Schweis"],lines:[["F","S, C, H, W, E, I, Z."]]},
+    {k:"mc",q:"Das Wort:",a:"Tschüs",o:["Tschus","Tchüs"],lines:[["M","T, S, C, H, Ü, S."]]},
+    {k:"mc",q:"Das Wort:",a:"Österreich",o:["Osterreich","Östereich"],lines:[["F2","Ö, S, T, E, R, R, E, I, C, H."]]},
+    {k:"mc",q:"Das Wort:",a:"heißen",o:["heissen","haißen"],lines:[["M2","H, E, I, ß, E, N."]]},
+    {k:"mc",q:"Das Wort:",a:"Frankreich",o:["Frankraich","Frankreisch"],lines:[["F","F, R, A, N, K, R, E, I, C, H."]]}]}
  ],
  lesen:[
   {id:"r1",de:"Im Deutschkurs",text:["Hallo! Ich bin Amira. Mein Familienname ist Yilmaz. Ich komme aus der Türkei.","Das ist Malik. Er kommt aus Frankreich. Malik und ich sagen „du“.","Und das ist Frau Delgado. Sie kommt aus Spanien. Frau Delgado und Herr Brandt sagen „Sie“."],
@@ -1001,9 +1041,9 @@ const synthOK=()=>{try{return"speechSynthesis"in window&&(deVoices().length>0||(
    De vraies voix allemandes (deux hommes, deux femmes), rangées par leçon dans le dossier audio/. Une leçon se télécharge
    une fois, puis reste sur l'appareil. Ce qui n'a pas d'enregistrement (nombres tirés au hasard, lettres épelées) et tout
    ce qui n'est pas encore chargé passe par la voix du téléphone. */
-const REC={on:SOLO,dir:"audio/v1/",P:{},cur:null,el:null};
+const REC={on:SOLO,dir:"audio/v2/",P:{},cur:null,el:null};
 const fnv=s=>{let h=0x811c9dc5;const b=new TextEncoder().encode(s);for(let i=0;i<b.length;i++){h^=b[i];h=Math.imul(h,0x01000193)>>>0}return h.toString(36)};
-const recOn=()=>REC.on&&S.set.rec!==0;
+const recOn=()=>REC.on;
 const recReady=()=>recOn()&&Object.keys(REC.P).some(k=>REC.P[k].buf);
 function recLoad(id){
   if(!REC.on||!id)return Promise.resolve(null);let p=REC.P[id];if(p)return p.ready;
@@ -1027,12 +1067,12 @@ function recPlay(hit,slow,cb){
   catch(e){return false}
 }
 const sayNorm=t=>String(t).replace(/\s*\([^)]*\)/g,"").replace(/___/g,"").replace(/Perfekt:/g,"").replace(/→/g,",").replace(/[😀🙂😐🙁]/gu,"").trim();
-const audioOK=()=>S.set.audio&&(!!TTS||synthOK()||recReady());
+const audioOK=()=>S.set.audio&&(!!TTS||synthOK());
+const hoerOK=()=>S.set.audio&&(!!TTS||synthOK()||REC.on); /* les documents d'écoute ont leurs propres voix */
 function refreshAudio(){document.body.classList.toggle("noaudio",!audioOK())}
 function synth(text,slow){try{if(!synthOK())return;const v=deVoices();if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text),best=v.find(x=>/google|natural|neural|premium|enhanced/i.test(x.name))||v[0];if(best)u.voice=best;u.lang="de-DE";u.rate=slow?.65:.9;speechSynthesis.speak(u)}catch(e){}}
 function say(text,slow){
   if(!S.set.audio||!text)return;text=sayNorm(text);if(!text)return;
-  const hit=recFind(text);if(hit&&recPlay(hit,slow))return;recStop();
   if(TTS){TTS.speak(text,{language:"de",rate:slow?.72:1}).catch(e=>{const c=e&&e.code;if(c==="not_granted"||c==="unavailable"){TTS=null;refreshAudio()}if(c!=="replaced"&&c!=="stopped"&&c!=="viewer_stopped"&&c!=="busy")synth(text,slow)})}
   else synth(text,slow);
 }
@@ -1091,6 +1131,7 @@ function startListening(onUpdate,onEnd,target,lang,hold){ /* à appeler directem
   }
   if(mode==="sr"){
     let acc="",base="",ended=false,userStop=false,last=Date.now(),cur=null,restarts=0;MICERR="";
+    const HM=hold===true?5000:+hold||0,WAIT=15000,t0=Date.now(); /* HM : silence toléré après les derniers mots ; WAIT : attente du premier mot */
     const alt=res=>{let b=res[0].transcript,bs=-1;for(let k=0;k<res.length;k++){const x=res[k].transcript,v=target?sim(x,target):0;if(v>bs){bs=v;b=x}}return b.trim()};
     /* selon le téléphone, chaque résultat reprend ou non le début de la phrase : on fusionne sans doublon */
     const merge=rs=>{let t="";for(let i=0;i<rs.length;i++){const x=alt(rs[i]);if(!x)continue;const a=t.toLowerCase().trim();t=a&&x.toLowerCase().startsWith(a)?x:(t?t+" ":"")+x}return t};
@@ -1100,8 +1141,8 @@ function startListening(onUpdate,onEnd,target,lang,hold){ /* à appeler directem
         const r=cur=new SR();r.lang=lang==="fr"?"fr-FR":"de-DE";r.interimResults=true;r.maxAlternatives=3;r.continuous=!!hold;
         r.onresult=e=>{last=Date.now();acc=merge(e.results);onUpdate(all())};
         /* hors de Claude, un refus du micro n'est pas définitif : on laisse réessayer après autorisation */
-        r.onerror=e=>{MICERR=e.error;if(e.error==="language-not-supported"||(!SOLO&&["not-allowed","service-not-allowed","audio-capture"].includes(e.error)))srOff=true;if(!(hold&&e.error==="no-speech"&&all()))finish(e.error)};
-        r.onend=()=>{if(ended)return;if(hold&&!userStop&&Date.now()-last<5000&&restarts<8){restarts++;base=all();acc="";setTimeout(()=>{if(!ended&&!userStop)launch()},120);return}finish("stopped")};
+        r.onerror=e=>{MICERR=e.error;if(e.error==="language-not-supported"||(!SOLO&&["not-allowed","service-not-allowed","audio-capture"].includes(e.error)))srOff=true;if(!(hold&&e.error==="no-speech"&&(all()||Date.now()-t0<WAIT)))finish(e.error)};
+        r.onend=()=>{if(ended)return;if(hold&&!userStop&&restarts<14&&(all()?Date.now()-last<HM:Date.now()-t0<WAIT)){restarts++;base=all();acc="";setTimeout(()=>{if(!ended&&!userStop)launch()},120);return}finish("stopped")};
         r.start();
       }catch(e){srOff=true;finish("unavailable")}
     };
@@ -1363,11 +1404,11 @@ function forced(it,k){
 
 /* ---------- navigation ---------- */
 let VIEW="home",ARG=null,RUN=null,T=null;
-const VIEWS={home,unit,lesson,train,words,trad,progress,help,kbd};
-const TAB={home:"home",unit:"home",lesson:"home",train:"train",words:"train",trad:"train",progress:"progress",help:"home",kbd:"home"};
+const VIEWS={home,unit,lesson,train,words,trad,progress,help,kbd,eco,pro};
+const TAB={home:"home",unit:"home",lesson:"home",train:"train",words:"train",trad:"train",progress:"progress",help:"home",kbd:"home",eco:"train",pro:"train"};
 function go(v,arg){
   stopListening();hush();stopLines();VIEW=v;ARG=arg===undefined?null:arg;RUN=null;F.innerHTML="";NAV.hidden=false;
-  $$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===TAB[v]));window.scrollTo(0,0);recCtx(Array.isArray(ARG)?ARG[0]:ARG);VIEWS[v](ARG);refreshAudio();
+  $$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===TAB[v]));window.scrollTo(0,0);VIEWS[v](ARG);refreshAudio();
 }
 NAV.addEventListener("click",e=>{const b=e.target.closest("button");if(b)go(b.dataset.v)});
 document.addEventListener("click",e=>{if(e.target.closest("#helpb")){go("help");return}const s=e.target.closest("[data-say]");if(!s)return;
@@ -1449,7 +1490,7 @@ function lesson(id){
 }
 
 /* ---------- S'entraîner : révisions et ateliers ---------- */
-const MODES=[["pro","🎤","Parler","prononcer et lire"],["eco","🎧","Écouter","dialogues et dictée",1],["gra","⚙️","Grammaire et dialogues","compléter, ordonner"],["tst","🏁","Test d’entraînement","version courte"]];
+const MODES=[["pro","🎤","Parler","mots, phrases, textes"],["eco","🎧","Écouter","dialogues, annonces, nombres"],["gra","⚙️","Grammaire et dialogues","compléter, ordonner"],["tst","🏁","Test d’entraînement","version courte"]];
 function train(){
   const due=dueItems(),weak=weakItems(),LV=curLevel(),m=curMod(),ls=lessonsOf(LV.id,m.n);
   const openId=S.topen==="none"?"":ls.some(L=>L.id===S.topen)?S.topen:(ls.find(L=>pct(L.items)<100)||ls[0]).id;
@@ -1468,7 +1509,49 @@ function train(){
   $$(".mods button").forEach(b=>b.onclick=()=>keep(()=>{S.nav.md=+b.dataset.md;S.topen=""}));
   $$("[data-tl]").forEach(b=>b.onclick=()=>keep(()=>{S.topen=b.getAttribute("aria-expanded")==="true"?"none":b.dataset.tl}));
   $$("[data-w]").forEach(b=>b.onclick=()=>go("words",b.dataset.w));$$("[data-tr]").forEach(b=>b.onclick=()=>go("trad",b.dataset.tr));
-  $$("[data-p]").forEach(b=>b.onclick=()=>{const [id,k]=b.dataset.p.split("|"),L=LESSONS.find(x=>x.id===id);k==="tst"?testIntro(L,"train"):practice(L,k)});
+  $$("[data-p]").forEach(b=>b.onclick=()=>{const [id,k]=b.dataset.p.split("|"),L=LESSONS.find(x=>x.id===id);k==="tst"?testIntro(L,"train"):k==="eco"?go("eco",id):k==="pro"?go("pro",id):practice(L,k)});
+}
+/* ---------- atelier Écouter : les documents sonores de la leçon, rangés par famille ---------- */
+function eco(id){
+  const L=LESSONS.find(x=>x.id===id)||LESSONS[0],H=L.hoer||[];recCtx(L);
+  const cats=HCAT.map(c=>({c,ds:H.filter(p=>p.cat===c[0])})).filter(x=>x.ds.length),nd=H.filter(p=>hoerDone(L,p)).length;
+  A.innerHTML=`<button class="back" id="back">← S’entraîner</button><div style="${L.css}"><span class="sign">Écouter · Leçon ${L.n}</span></div>
+  <div class="panel"><h3>${nd} sur ${H.length} documents réussis</h3>
+  <div class="meter" style="margin-top:10px" role="img" aria-label="${nd} réussis sur ${H.length}"><i class="m4" style="width:${H.length?nd/H.length*100:0}%"></i></div>
+  <p class="mu sm" style="margin:10px 0 0">Des voix d’hommes et de femmes, à vitesse naturelle. Tu écoutes, puis tu réponds. Un document est réussi quand toutes ses réponses sont justes.</p></div>
+  ${hoerOK()?"":`<p class="hint">La voix allemande est coupée dans tes réglages (onglet Progrès) : les documents ne peuvent pas être lus.</p>`}
+  <button class="btn" id="mix" ${H.length&&hoerOK()?"":"disabled"}>Mélangé</button>
+  ${cats.length?`<h3 style="margin-top:22px">Par type de document</h3>`+cats.map(({c,ds})=>{const n=ds.filter(p=>hoerDone(L,p)).length;return`<button class="tile" data-hc="${c[0]}" ${hoerOK()?"":"disabled"}><span class="ic">${c[1]}</span><span><b>${c[2]}</b><small>${nb(ds.length,"document")} · ${n} réussi${n>1?"s":""} · ${c[3]}</small></span></button>`}).join(""):""}`;
+  $("#back").onclick=()=>go("train");
+  const pri=a=>[...shuffle(a.filter(p=>!hoerDone(L,p))),...shuffle(a.filter(p=>hoerDone(L,p)))];
+  const start=ds=>{if(ds.length)run(ds.map(p=>({auf:Object.assign(hoerAuf(p),{key:hoerKey(L,p)})})),{kind:"practice",L,title:"Écouter",back:["eco",L.id]})};
+  $("#mix").onclick=()=>start(cats.length?shuffle(cats.map(x=>pri(x.ds)[0])).slice(0,4):pri(H).slice(0,3));
+  $$("[data-hc]").forEach(b=>b.onclick=()=>start(pri(H.filter(p=>p.cat===b.dataset.hc)).slice(0,4)));
+}
+/* ---------- atelier Parler : mots difficiles, phrases, textes ---------- */
+const hardness=it=>{const w=it.de.replace(/^(der|die|das) /,"");return w.length/3+2*(w.match(/[äöüßÄÖÜ]/g)||[]).length+1.5*(w.match(/sch|ch|sp|st|pf|tz|eu|äu|ei|ie|qu|ng|z|r/gi)||[]).length};
+const proWords=L=>L.items.filter(it=>it.t==="w"&&!it.nd&&!it.rec).sort((a,b)=>hardness(b)-hardness(a)).slice(0,18);
+const pOk=it=>(st(it).p||0)>=75;
+function pro(id){
+  const L=LESSONS.find(x=>x.id===id)||LESSONS[0],W=proWords(L),Sx=L.items.filter(it=>it.t==="s"),Tx=L.tx||[];
+  const top=`<button class="back" id="back">← S’entraîner</button><div style="${L.css}"><span class="sign">Parler · Leçon ${L.n}</span></div>`;
+  if(micMode()==="none"){
+    A.innerHTML=top+`<div class="panel"><p style="margin:0">${NOMIC}</p>${S.set.mic?"":`<p class="mu sm" style="margin:10px 0 0">Les exercices de prononciation sont aussi désactivés dans tes réglages (onglet Progrès).</p>`}</div>`;
+    $("#back").onclick=()=>go("train");return;
+  }
+  const n=a=>a.filter(pOk).length;
+  A.innerHTML=top+`<div class="panel"><p style="margin:0">Tu lis à voix haute, l’application t’écoute et te note. Le micro attend que tu aies fini : prends ton temps. Tu peux aussi toucher « J’ai fini ».</p></div>
+  <button class="btn" id="mix">Mélangé</button>
+  <h3 style="margin-top:22px">Par type</h3>
+  <button class="tile" data-pk="w"><span class="ic">🔤</span><span><b>Mots difficiles</b><small>${nb(W.length,"mot")} · ${n(W)} validé${n(W)>1?"s":""} · les plus durs à prononcer de la leçon</small></span></button>
+  <button class="tile" data-pk="s"><span class="ic">💬</span><span><b>Phrases</b><small>${nb(Sx.length,"phrase")} · ${n(Sx)} validée${n(Sx)>1?"s":""}</small></span></button>
+  ${Tx.length?`<button class="tile" data-pk="t"><span class="ic">📜</span><span><b>Textes</b><small>${nb(Tx.length,"texte")} · lecture à voix haute, phrase par phrase</small></span></button>`:""}`;
+  $("#back").onclick=()=>go("train");
+  const pri=a=>[...shuffle(a.filter(x=>!pOk(x))),...shuffle(a.filter(pOk))],sp=a=>a.map(it=>({speak:it}));
+  const text=t=>{const ss=t.de.split(/(?<=[.!?])\s+/).map(x=>x.replace(/^–\s*/,"").trim()).filter(x=>toks(x).length>=2);return ss.map((x,k)=>({speak:{t:"s",de:x,fr:""},read:1,head:`Lecture à voix haute · phrase ${k+1} sur ${ss.length}`}))};
+  const start=q=>{if(q.length)run(q,{kind:"practice",L,title:"Parler",back:["pro",L.id],pro:true})};
+  $("#mix").onclick=()=>start([...shuffle([...sp(pri(Sx).slice(0,4)),...sp(pri(W).slice(0,3))]),...(Tx.length?text(shuffle(Tx)[0]):[])]);
+  $$("[data-pk]").forEach(b=>b.onclick=()=>{const k=b.dataset.pk;start(k==="w"?sp(pri(W).slice(0,8)):k==="s"?sp(pri(Sx).slice(0,8)):shuffle(Tx).slice(0,2).flatMap(text))});
 }
 /* tous les mots d'une leçon, dans les deux sens, avec le compte des mots validés */
 const DIRS=[["mix","Mélangé"],["de2fr","Allemand → français"],["fr2de","Français → allemand"]];
@@ -1514,12 +1597,11 @@ function progress(){
   <p class="mu sm" id="goalmsg" style="margin:-4px 0 10px">Choisis la valeur que tu veux, de 10 à 5000. Une série rapporte environ 100 XP.</p>
   <p class="row"><span class="grow">Nouveaux éléments par série</span>${sel("per",[[4,"4"],[6,"6"],[8,"8"],[10,"10"]],S.set.per)}</p>
   <p class="row"><span class="grow">Voix allemande</span>${sel("aud",[[1,"Activée"],[0,"Coupée"]],S.set.audio?1:0)}</p>
-  ${REC.on?`<p class="row"><span class="grow">Voix des exercices</span>${sel("rec",[[1,"Enregistrées (hommes et femmes)"],[0,"Voix du téléphone"]],S.set.rec===0?0:1)}</p>`:""}
   <p class="row"><span class="grow">Sons et vibrations</span>${sel("sfx",[[1,"Activés"],[0,"Coupés"]],S.set.sfx?1:0)}</p>
   <p class="row"><span class="grow">Exercices de prononciation</span>${sel("mic",[[1,"Activés (micro)"],[0,"Désactivés"]],S.set.mic?1:0)}</p>
   <p class="mu sm" style="margin:12px 0 0">${cloud==="cloud"?"Progression enregistrée sur ton compte : tu la retrouves sur tes autres appareils.":"Progression enregistrée sur cet appareil."}</p></div>
   <div class="panel"><h3>Cet appareil</h3>
-  <p class="mu sm" style="margin:6px 0 10px">${SOLO?"Version autonome":"Version ouverte dans Claude"} · voix des exercices : ${recOn()?"enregistrées (hommes et femmes)":"celle du téléphone"} · voix du téléphone : ${TTS?"fournie par Claude":deVoices().length?"celle de l’appareil":synthOK()?"celle du système":"introuvable"} · écoute : ${micMode()==="cap"?"fournie par Claude":micMode()==="sr"?"reconnaissance vocale du navigateur":"indisponible ici"}.</p>
+  <p class="mu sm" style="margin:6px 0 10px">${SOLO?"Version autonome":"Version ouverte dans Claude"} · voix allemande : ${TTS?"fournie par Claude":deVoices().length?"celle de l’appareil":synthOK()?"celle du système":"introuvable"} · écoute : ${micMode()==="cap"?"fournie par Claude":micMode()==="sr"?"reconnaissance vocale du navigateur":"indisponible ici"}.</p>
   <div class="grid2"><button class="btn sec" id="tvoice">Tester la voix</button><button class="btn sec" id="tmic">Tester le micro</button></div>
   <p class="sm" id="devmsg" style="margin:10px 0 0" aria-live="polite"></p>
   ${!audioOK()&&S.set.audio?`<p class="hint">Aucune voix allemande n’a été trouvée. Sur Android : Paramètres, puis Synthèse vocale, et installe l’allemand dans les données vocales.</p>`:""}</div>
@@ -1531,7 +1613,7 @@ function progress(){
   $("#tmic").onclick=()=>{const m=$("#devmsg");if(micMode()==="none"){m.textContent=NOMIC;return}hush();m.textContent="Je t’écoute : dis « Guten Tag ».";let q=setTimeout(()=>CTL&&CTL.stop(),7000);
     CTL=startListening(t=>{clearTimeout(q);q=setTimeout(()=>CTL&&CTL.stop(),1800);if($("#devmsg"))$("#devmsg").textContent="Entendu : "+t},(h,r)=>{clearTimeout(q);CTL=null;if(!$("#devmsg"))return;$("#devmsg").textContent=h?"Entendu : « "+h+" ». Le micro fonctionne.":(micHelp(r)||"Rien entendu.")+" (code : "+(r||"aucun")+")"},"Guten Tag")};
   $("#per").onchange=e=>{S.set.per=+e.target.value;save()};
-  $("#aud").onchange=e=>{S.set.audio=e.target.value==="1";save();refreshAudio()};if($("#rec"))$("#rec").onchange=e=>{S.set.rec=+e.target.value;hush();save();refreshAudio()};$("#sfx").onchange=e=>{S.set.sfx=e.target.value==="1";save()};$("#mic").onchange=e=>{S.set.mic=e.target.value==="1";save()};
+  $("#aud").onchange=e=>{S.set.audio=e.target.value==="1";save();refreshAudio()};$("#sfx").onchange=e=>{S.set.sfx=e.target.value==="1";save()};$("#mic").onchange=e=>{S.set.mic=e.target.value==="1";save()};
   $("#cpy").onclick=()=>{const t=$("#io"),done=ok=>{$("#iomsg").textContent=ok?"Sauvegarde copiée. Colle-la dans un message ou une note pour la garder.":"La copie automatique n’a pas marché : sélectionne le texte et copie-le à la main."};
     try{navigator.clipboard.writeText(t.value).then(()=>done(true)).catch(()=>{t.select();done(document.execCommand("copy"))})}catch(e){try{t.select();done(document.execCommand("copy"))}catch(e2){done(false)}}};
   $("#imp").onclick=()=>{try{const o=JSON.parse($("#io").value);if(!o||typeof o.items!=="object")throw 0;S=norm(o);save();go("progress")}catch(e){$("#iomsg").textContent="Ce texte n’est pas une sauvegarde valide. Rien n’a été modifié."}};
@@ -1725,7 +1807,7 @@ function itemPts(it,a){
 const aufScore=(A_,ans)=>A_.items.reduce((s,it,i)=>{const [p,m]=itemPts(it,ans[i]);return[s[0]+p,s[1]+m]},[0,0]);
 function itemHtml(it,i,a,done){
   const dis=done?"disabled":"",bad=done&&!itemOk(it,a),corr=bad?` <span class="corr1">→ ${esc(itemAns(it))}</span>`:"";
-  const pl=it.lines&&audioOK()?`<button class="pl1" data-pi="${i}" type="button">${TX().play}</button> `:"";
+  const pl=it.lines&&hoerOK()?`<button class="pl1" data-pi="${i}" type="button">${TX().play}</button> `:"";
   if(it.k==="ord"){
     const placed=a||[],chip=(j,inA)=>`<button class="oc" type="button" data-i="${i}" data-j="${j}" data-a="${inA?1:0}" ${dis}>${esc(it.chips[j])}</button>`;
     return`<span class="ordA ${it.block?"blk":""}">${it.lead?`<b class="art">${esc(it.lead)}</b>`:""}${placed.map(j=>chip(j,true)).join("")}${it.end?`<b class="oend">${esc(it.end)}</b>`:""}</span><span class="ordB ${it.block?"blk":""}">${it.order.filter(j=>!placed.includes(j)).map(j=>chip(j,false)).join("")}</span>${corr}`;
@@ -1739,7 +1821,7 @@ function aufRender(A_,ans,done){
   const sub=deOnly()?(A_.de||""):[A_.fr,A_.frx].filter(Boolean).join(" "),all=A_.lines||A_.items.flatMap(it=>it.lines||[]);
   return`<p class="instr"><b>${esc(A_.instr)}</b>${sub?`<span>${esc(sub)}</span>`:""}</p>
   ${A_.text?`<div class="ltext">${A_.title?`<b>${esc(A_.title)}</b>`:""}${A_.text.map(p=>`<p>${esc(p)}</p>`).join("")}</div>`:""}
-  ${A_.lines?(audioOK()?`<div class="player"><button class="btn sec" id="play" type="button">${TX().play}</button><span class="mu sm" id="pst" aria-live="polite"></span></div>`:`<p class="hint">Aucune voix allemande n’est disponible sur cet appareil : cet exercice d’écoute ne peut pas être lu.</p>`):""}
+  ${A_.lines?(hoerOK()?`<div class="player"><button class="btn sec" id="play" type="button">${TX().play}</button><span class="mu sm" id="pst" aria-live="polite"></span></div>`:`<p class="hint">Aucune voix allemande n’est disponible sur cet appareil : cet exercice d’écoute ne peut pas être lu.</p>`):""}
   ${A_.box?`<div class="wbox ${A_.boxCol?"col":""}">${A_.box.map(w=>`<span>${esc(w)}</span>`).join("")}</div>`:""}
   <ol class="auf">${A_.items.map((it,i)=>`<li class="${done?(itemOk(it,ans[i])?"ok":"ko"):""}">${itemHtml(it,i,ans[i],done)}</li>`).join("")}</ol>
   ${done&&all.length?`<details class="panel"><summary>Voir le texte entendu</summary>${all.map(([sp,t])=>`<p style="margin:8px 0 0">– ${esc(t)}</p>`).join("")}</details>`:""}`;
@@ -1782,7 +1864,17 @@ const taskItems=tasks=>{const items=[];tasks.forEach(t=>{
   else if(t.k==="zu"){const rs=shuffle(t.p.map(x=>x[1]));t.p.forEach(x=>items.push({k:"sel",pre:esc(x[0])+" → ___",opts:rs,a:x[1]}))}
 });return items};
 /* écoute : on entend, on ne lit pas ; un document long peut être découpé, une écoute par question */
-const hoerAuf=p=>({sec:"h",instr:p.seg?"Hören Sie jeden Text und antworten Sie.":"Hören Sie und antworten Sie.",fr:p.seg?"Écoute chaque passage, puis réponds à sa question.":"Écoute, puis réponds.",frx:"Situation : "+p.fr+".",de:p.de||"",lines:p.seg?null:p.lines,items:taskItems(p.tasks)});
+const HCAT=[["k","💬","Dialogues courts","quelques répliques, deux ou trois questions"],["l","🗣️","Dialogues longs","une écoute entière, puis des extraits"],["a","📢","Présentations, annonces et messages","une personne parle : se présenter, annonce, répondeur"],["z","🔢","Nombres, prix, heures, noms épelés","repérer une information précise"]];
+const hoerMax=p=>p.tasks.reduce((n,t)=>n+(t.k==="zu"?t.p.length:1),0);
+const hoerKey=(L,p)=>L.id+":"+p.id,hoerDone=(L,p)=>(S.bs[hoerKey(L,p)]||0)>=hoerMax(p);
+/* dans un test : des documents de familles différentes */
+function hoerPick(L,full){
+  const H=shuffle(L.hoer||[]),by=c=>H.filter(p=>p.cat===c);if(!H.some(p=>p.cat))return H.slice(0,full?2:1);
+  const out=[],take=(c)=>{const x=by(c).find(p=>!out.includes(p));if(x)out.push(x)};
+  if(full){take("l");take("k");take(Math.random()<.5?"a":"z");if(out.length<3){take("z");take("a")}return out.slice(0,3)}
+  take("k");take(Math.random()<.5?"a":"z");if(out.length<2)take("a");if(out.length<2)take("z");return out.slice(0,2);
+}
+const hoerAuf=p=>({sec:"h",instr:p.seg?"Hören Sie jeden Text und antworten Sie.":p.tasks.some(t=>t.lines)?"Hören Sie zuerst das ganze Gespräch. Hören Sie dann die Teile und antworten Sie.":"Hören Sie und antworten Sie.",fr:p.seg?"Écoute chaque passage, puis réponds à sa question.":p.tasks.some(t=>t.lines)?"Écoute d’abord tout le dialogue. Ensuite, réécoute chaque extrait et réponds.":"Écoute, puis réponds.",frx:"Situation : "+p.fr+".",de:p.de||"",lines:p.seg?null:p.lines,items:taskItems(p.tasks)});
 /* lecture : un texte à lire, puis des questions */
 const lesenAuf=r=>({sec:"l",instr:"Lesen Sie den Text und antworten Sie.",fr:"Lis le texte, puis réponds aux questions.",title:r.de,text:r.text,items:taskItems(r.tasks)});
 /* dans un atelier : une feuille, corrigée tout de suite */
@@ -1865,7 +1957,7 @@ function practice(L,mode){
 }
 
 /* ---------- déroulé d'une série ---------- */
-function run(q,o){try{const ls=[];(q||[]).forEach(c=>{const it=c&&(c.it||c.item||c),L=it&&it.L;if(L&&ls.indexOf(L)<0)ls.push(L)});ls.slice(0,8).forEach(L=>recLoad(L.id));const L0=(o&&(o.L||(o.u&&o.u.L)))||ls[0];if(L0)recCtx(L0)}catch(e){}RUN=Object.assign({q,done:0,first:0,miss:0,acq:0,xp:0,combo:0,tot0:q.length},o);if(RUN.u)RUN.full0=pct(RUN.u.items)>=100;NAV.hidden=true;nextCard()}
+function run(q,o){RUN=Object.assign({q,done:0,first:0,miss:0,acq:0,xp:0,combo:0,tot0:q.length},o);if(RUN.u)RUN.full0=pct(RUN.u.items)>=100;NAV.hidden=true;nextCard()}
 function quit(){const b=RUN&&RUN.back||["home"];stopListening();hush();stopLines();save();go(b[0],b[1])}
 function topBar(){const p=RUN.done/(RUN.done+RUN.q.length+1)*100;const L=RUN.L||(RUN.u&&RUN.u.L);return`<div class="top" style="${L?L.css:""}"><button class="x" id="x" aria-label="Quitter">✕</button><div class="bar"><i style="width:${p}%"></i></div><span class="cnt">⭐ ${RUN.xp}</span></div>`}
 function later(card,gap){RUN.q.splice(Math.min(RUN.q.length,gap),0,card)}
@@ -2047,18 +2139,19 @@ function showSpeak(it,done,opt){
     $("#nx").onclick=more?begin:()=>fin(pass);if($("#skip"))$("#skip").onclick=()=>fin(false);if($("#again"))$("#again").onclick=begin;$("#nx").focus();
   };
   const begin=()=>{
-    hush();sfx("mic");$("#sde").textContent=opt.show||it.de;$("#heard").textContent="Je t’écoute : parle maintenant.";
+    const HM=isW?2200:opt.read?3600:3000; /* silence laissé avant de couper : plus long pour une phrase, plus encore pour un texte */
+    hush();sfx("mic");$("#sde").textContent=opt.show||it.de;$("#heard").textContent="Je t’écoute. Prends ton temps : j’attends la fin de ta phrase.";
     F.innerHTML=`<div class="ft"><div class="in"><button class="btn no" id="stop">⏹ J’ai fini</button></div></div>`;
-    let quiet=setTimeout(()=>CTL&&CTL.stop(),micMode()==="sr"?12000:7000); /* laisse le temps d'accepter la demande du micro */
+    let quiet=setTimeout(()=>CTL&&CTL.stop(),micMode()==="sr"?16000:8000); /* laisse le temps d'accepter la demande du micro et de commencer */
     CTL=startListening(txt=>{
-      clearTimeout(quiet);quiet=setTimeout(()=>CTL&&CTL.stop(),1800);const el=$("#heard");if(el)el.textContent="Entendu : "+txt;if(sim(txt,it.de)>=.92&&CTL)CTL.stop();
+      clearTimeout(quiet);quiet=setTimeout(()=>CTL&&CTL.stop(),HM);const el=$("#heard");if(el)el.textContent="Entendu : "+txt;if(sim(txt,it.de)>=.92&&CTL)CTL.stop();
     },(heard,reason)=>{
       clearTimeout(timer);clearTimeout(quiet);if(SPK!==me||!RUN||!$("#heard"))return;CTL=null;
       if(!heard){blank++;if(micMode()==="none")return showSpeak(it,done,opt);
         $("#heard").textContent="";return idle(micHelp(reason)||(blank>=2?"Toujours rien. Vérifie que le micro est autorisé pour cette application, ou continue sans parler.":"Je n’ai rien entendu. Autorise le micro si le navigateur le demande, parle juste après le signal, puis réessaie."))}
       result(heard);
-    },it.de);
-    $("#stop").onclick=()=>CTL&&CTL.stop();timer=setTimeout(()=>CTL&&CTL.stop(),20000);
+    },it.de,"de",HM);
+    $("#stop").onclick=()=>CTL&&CTL.stop();timer=setTimeout(()=>CTL&&CTL.stop(),opt.read?40000:28000);
   };
   idle();
 }
@@ -2153,13 +2246,13 @@ function buildTest(L,mode){
   if(ds.length)T_.push({sec:"k",instr:"Ordnen Sie das Gespräch.",fr:"Touche les répliques dans l’ordre du dialogue.",items:ds.map(d=>ordItem(d,{block:1,each:1,say:"l",join:" – "}))});
   /* Lesen, puis Hören */
   shuffle(L.lesen||[]).slice(0,N(2,1)).forEach(r=>T_.push(lesenAuf(r)));
-  if(audioOK())shuffle(L.hoer||[]).slice(0,N(2,1)).forEach(p=>T_.push(hoerAuf(p)));
+  if(hoerOK())hoerPick(L,full).forEach(p=>T_.push(hoerAuf(p)));
   const order={w:0,s:1,k:2,l:3,h:4};T_.sort((a,b)=>order[a.sec]-order[b.sec]);
   return T_;
 }
 function testIntro(L,mode){
   mode=mode||"full";const from=VIEW,full=mode==="full";RUN=null;NAV.hidden=true;F.innerHTML="";window.scrollTo(0,0);
-  const hasH=(L.hoer||[]).length>0&&audioOK(),undisc=L.items.filter(it=>st(it).s===0).length,secs=["w","s","k"].concat((L.lesen||[]).length?["l"]:[],hasH?["h"]:[]);
+  recCtx(L);const hasH=(L.hoer||[]).length>0&&hoerOK(),undisc=L.items.filter(it=>st(it).s===0).length,secs=["w","s","k"].concat((L.lesen||[]).length?["l"]:[],hasH?["h"]:[]);
   A.innerHTML=`<button class="back" id="back">← Retour</button><div style="${L.css}"><span class="sign">${full?"Test":"Test d’entraînement"} · Leçon ${L.n}</span></div>
   <div class="panel"><p>${full?"30 minutes":"15 minutes"}, ${secs.length} parties notées séparément, construites comme les tests de ton cahier d’exercices.</p>
   <div class="lights">${secs.map(s=>`<div class="light"><i class="g"></i><b>${SECN[s]} <span class="mu" style="font-size:15px;font-weight:500">${SECF[s]}</span></b><span></span></div>`).join("")}</div>

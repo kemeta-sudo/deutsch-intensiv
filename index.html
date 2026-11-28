@@ -997,15 +997,46 @@ const ANDROID=/Android/i.test(navigator.userAgent);
 let TTS=null,INSTALL=null,MICERR="";
 const deVoices=()=>{try{return speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang))}catch(e){return[]}};
 const synthOK=()=>{try{return"speechSynthesis"in window&&(deVoices().length>0||(ANDROID&&speechSynthesis.getVoices().length===0))}catch(e){return false}};
-const audioOK=()=>S.set.audio&&(!!TTS||synthOK());
+/* ---------- voix enregistrées ----------
+   De vraies voix allemandes (deux hommes, deux femmes), rangées par leçon dans le dossier audio/. Une leçon se télécharge
+   une fois, puis reste sur l'appareil. Ce qui n'a pas d'enregistrement (nombres tirés au hasard, lettres épelées) et tout
+   ce qui n'est pas encore chargé passe par la voix du téléphone. */
+const REC={on:SOLO,dir:"audio/v1/",P:{},cur:null,el:null};
+const fnv=s=>{let h=0x811c9dc5;const b=new TextEncoder().encode(s);for(let i=0;i<b.length;i++){h^=b[i];h=Math.imul(h,0x01000193)>>>0}return h.toString(36)};
+const recOn=()=>REC.on&&S.set.rec!==0;
+const recReady=()=>recOn()&&Object.keys(REC.P).some(k=>REC.P[k].buf);
+function recLoad(id){
+  if(!REC.on||!id)return Promise.resolve(null);let p=REC.P[id];if(p)return p.ready;
+  p=REC.P[id]={idx:null,buf:null};
+  p.ready=fetch(REC.dir+id+".json").then(r=>r.ok?r.json():Promise.reject()).then(j=>{p.idx=j;return fetch(REC.dir+id+".bin")}).then(r=>r.ok?r.arrayBuffer():Promise.reject())
+    .then(b=>{p.buf=b;refreshAudio();return p}).catch(()=>{delete REC.P[id];return null});
+  return p.ready;
+}
+function recCtx(a){try{const L=a&&a.units?a:a&&a.L?a.L:typeof a==="string"?LESSONS.find(x=>x.id===a||a.indexOf(x.id+":")===0):null;if(L&&REC.on){REC.cur=L.id;recLoad(L.id)}}catch(e){}}
+function recFind(key){
+  if(!recOn())return null;const h=fnv(key),c=REC.P[REC.cur];if(c&&c.buf&&c.idx[h])return[c,c.idx[h]];
+  for(const id in REC.P){const p=REC.P[id];if(p.buf&&p.idx[h])return[p,p.idx[h]]}return null;
+}
+function recStop(){const a=REC.el;if(a){REC.el=null;try{a.onended=a.onerror=null;a.pause()}catch(e){}}}
+function recPlay(hit,slow,cb){
+  try{recStop();try{speechSynthesis.cancel()}catch(e){}
+    const p=hit[0],o=hit[1][0],n=hit[1][1],url=URL.createObjectURL(new Blob([p.buf.slice(o,o+n)],{type:"audio/mpeg"})),a=new Audio(url);
+    REC.el=a;a.playbackRate=slow?.72:1;let done=false;
+    const fin=()=>{if(done)return;done=true;if(REC.el===a)REC.el=null;try{URL.revokeObjectURL(url)}catch(e){}cb&&cb()};
+    a.onended=fin;a.onerror=fin;const pr=a.play();if(pr&&pr.catch)pr.catch(fin);return true}
+  catch(e){return false}
+}
+const sayNorm=t=>String(t).replace(/\s*\([^)]*\)/g,"").replace(/___/g,"").replace(/Perfekt:/g,"").replace(/→/g,",").replace(/[😀🙂😐🙁]/gu,"").trim();
+const audioOK=()=>S.set.audio&&(!!TTS||synthOK()||recReady());
 function refreshAudio(){document.body.classList.toggle("noaudio",!audioOK())}
 function synth(text,slow){try{if(!synthOK())return;const v=deVoices();if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text),best=v.find(x=>/google|natural|neural|premium|enhanced/i.test(x.name))||v[0];if(best)u.voice=best;u.lang="de-DE";u.rate=slow?.65:.9;speechSynthesis.speak(u)}catch(e){}}
 function say(text,slow){
-  if(!S.set.audio||!text)return;text=String(text).replace(/\s*\([^)]*\)/g,"").replace(/___/g,"").replace(/Perfekt:/g,"").replace(/→/g,",").replace(/[😀🙂😐🙁]/gu,"").trim();if(!text)return;
+  if(!S.set.audio||!text)return;text=sayNorm(text);if(!text)return;
+  const hit=recFind(text);if(hit&&recPlay(hit,slow))return;recStop();
   if(TTS){TTS.speak(text,{language:"de",rate:slow?.72:1}).catch(e=>{const c=e&&e.code;if(c==="not_granted"||c==="unavailable"){TTS=null;refreshAudio()}if(c!=="replaced"&&c!=="stopped"&&c!=="viewer_stopped"&&c!=="busy")synth(text,slow)})}
   else synth(text,slow);
 }
-function hush(){try{TTS&&TTS.stop().catch(()=>{})}catch(e){}try{speechSynthesis.cancel()}catch(e){}}
+function hush(){recStop();try{TTS&&TTS.stop().catch(()=>{})}catch(e){}try{speechSynthesis.cancel()}catch(e){}}
 try{speechSynthesis.onvoiceschanged=refreshAudio}catch(e){}
 if(window.claude&&window.claude.use)window.claude.use("tts").then(t=>{TTS=t;refreshAudio()}).catch(()=>{});
 /* effets sonores composés pour l'app : un son par situation (réussite, erreur, enchaînement, paire, fin de série, unité terminée) */
@@ -1336,7 +1367,7 @@ const VIEWS={home,unit,lesson,train,words,trad,progress,help,kbd};
 const TAB={home:"home",unit:"home",lesson:"home",train:"train",words:"train",trad:"train",progress:"progress",help:"home",kbd:"home"};
 function go(v,arg){
   stopListening();hush();stopLines();VIEW=v;ARG=arg===undefined?null:arg;RUN=null;F.innerHTML="";NAV.hidden=false;
-  $$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===TAB[v]));window.scrollTo(0,0);VIEWS[v](ARG);refreshAudio();
+  $$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===TAB[v]));window.scrollTo(0,0);recCtx(Array.isArray(ARG)?ARG[0]:ARG);VIEWS[v](ARG);refreshAudio();
 }
 NAV.addEventListener("click",e=>{const b=e.target.closest("button");if(b)go(b.dataset.v)});
 document.addEventListener("click",e=>{if(e.target.closest("#helpb")){go("help");return}const s=e.target.closest("[data-say]");if(!s)return;
@@ -1483,11 +1514,12 @@ function progress(){
   <p class="mu sm" id="goalmsg" style="margin:-4px 0 10px">Choisis la valeur que tu veux, de 10 à 5000. Une série rapporte environ 100 XP.</p>
   <p class="row"><span class="grow">Nouveaux éléments par série</span>${sel("per",[[4,"4"],[6,"6"],[8,"8"],[10,"10"]],S.set.per)}</p>
   <p class="row"><span class="grow">Voix allemande</span>${sel("aud",[[1,"Activée"],[0,"Coupée"]],S.set.audio?1:0)}</p>
+  ${REC.on?`<p class="row"><span class="grow">Voix des exercices</span>${sel("rec",[[1,"Enregistrées (hommes et femmes)"],[0,"Voix du téléphone"]],S.set.rec===0?0:1)}</p>`:""}
   <p class="row"><span class="grow">Sons et vibrations</span>${sel("sfx",[[1,"Activés"],[0,"Coupés"]],S.set.sfx?1:0)}</p>
   <p class="row"><span class="grow">Exercices de prononciation</span>${sel("mic",[[1,"Activés (micro)"],[0,"Désactivés"]],S.set.mic?1:0)}</p>
   <p class="mu sm" style="margin:12px 0 0">${cloud==="cloud"?"Progression enregistrée sur ton compte : tu la retrouves sur tes autres appareils.":"Progression enregistrée sur cet appareil."}</p></div>
   <div class="panel"><h3>Cet appareil</h3>
-  <p class="mu sm" style="margin:6px 0 10px">${SOLO?"Version autonome":"Version ouverte dans Claude"} · voix allemande : ${TTS?"fournie par Claude":deVoices().length?"celle de l’appareil":synthOK()?"celle du système":"introuvable"} · écoute : ${micMode()==="cap"?"fournie par Claude":micMode()==="sr"?"reconnaissance vocale du navigateur":"indisponible ici"}.</p>
+  <p class="mu sm" style="margin:6px 0 10px">${SOLO?"Version autonome":"Version ouverte dans Claude"} · voix des exercices : ${recOn()?"enregistrées (hommes et femmes)":"celle du téléphone"} · voix du téléphone : ${TTS?"fournie par Claude":deVoices().length?"celle de l’appareil":synthOK()?"celle du système":"introuvable"} · écoute : ${micMode()==="cap"?"fournie par Claude":micMode()==="sr"?"reconnaissance vocale du navigateur":"indisponible ici"}.</p>
   <div class="grid2"><button class="btn sec" id="tvoice">Tester la voix</button><button class="btn sec" id="tmic">Tester le micro</button></div>
   <p class="sm" id="devmsg" style="margin:10px 0 0" aria-live="polite"></p>
   ${!audioOK()&&S.set.audio?`<p class="hint">Aucune voix allemande n’a été trouvée. Sur Android : Paramètres, puis Synthèse vocale, et installe l’allemand dans les données vocales.</p>`:""}</div>
@@ -1499,7 +1531,7 @@ function progress(){
   $("#tmic").onclick=()=>{const m=$("#devmsg");if(micMode()==="none"){m.textContent=NOMIC;return}hush();m.textContent="Je t’écoute : dis « Guten Tag ».";let q=setTimeout(()=>CTL&&CTL.stop(),7000);
     CTL=startListening(t=>{clearTimeout(q);q=setTimeout(()=>CTL&&CTL.stop(),1800);if($("#devmsg"))$("#devmsg").textContent="Entendu : "+t},(h,r)=>{clearTimeout(q);CTL=null;if(!$("#devmsg"))return;$("#devmsg").textContent=h?"Entendu : « "+h+" ». Le micro fonctionne.":(micHelp(r)||"Rien entendu.")+" (code : "+(r||"aucun")+")"},"Guten Tag")};
   $("#per").onchange=e=>{S.set.per=+e.target.value;save()};
-  $("#aud").onchange=e=>{S.set.audio=e.target.value==="1";save();refreshAudio()};$("#sfx").onchange=e=>{S.set.sfx=e.target.value==="1";save()};$("#mic").onchange=e=>{S.set.mic=e.target.value==="1";save()};
+  $("#aud").onchange=e=>{S.set.audio=e.target.value==="1";save();refreshAudio()};if($("#rec"))$("#rec").onchange=e=>{S.set.rec=+e.target.value;hush();save();refreshAudio()};$("#sfx").onchange=e=>{S.set.sfx=e.target.value==="1";save()};$("#mic").onchange=e=>{S.set.mic=e.target.value==="1";save()};
   $("#cpy").onclick=()=>{const t=$("#io"),done=ok=>{$("#iomsg").textContent=ok?"Sauvegarde copiée. Colle-la dans un message ou une note pour la garder.":"La copie automatique n’a pas marché : sélectionne le texte et copie-le à la main."};
     try{navigator.clipboard.writeText(t.value).then(()=>done(true)).catch(()=>{t.select();done(document.execCommand("copy"))})}catch(e){try{t.select();done(document.execCommand("copy"))}catch(e2){done(false)}}};
   $("#imp").onclick=()=>{try{const o=JSON.parse($("#io").value);if(!o||typeof o.items!=="object")throw 0;S=norm(o);save();go("progress")}catch(e){$("#iomsg").textContent="Ce texte n’est pas une sauvegarde valide. Rien n’a été modifié."}};
@@ -1667,11 +1699,15 @@ function playLines(lines,onState){
     let done=false;const fin=()=>{if(done)return;done=true;setTimeout(cb,380)};u.onend=fin;u.onerror=fin;speechSynthesis.speak(u);setTimeout(fin,1800+text.length*115)}catch(e){cb()}};
   const next=()=>{
     if(!alive)return;if(i>=lines.length)return end();const [sp,text]=lines[i++];onState("line",i,lines.length);
+    const hit=recFind(sp+"|"+sayNorm(text));if(hit&&recPlay(hit,false,()=>setTimeout(next,420)))return;
     if(TTS)TTS.speak(text,{language:"de",rate:.95}).then(()=>setTimeout(next,380)).catch(e=>{const c=e&&e.code;if(c==="replaced"||c==="stopped"||c==="viewer_stopped")return end();viaSynth(sp,text,next)});
     else viaSynth(sp,text,next);
   };
-  const me=HP={stop(){alive=false;try{speechSynthesis.cancel()}catch(e){}try{TTS&&TTS.stop().catch(()=>{})}catch(e){}onState("end")}};
-  next();
+  const me=HP={stop(){alive=false;recStop();try{speechSynthesis.cancel()}catch(e){}try{TTS&&TTS.stop().catch(()=>{})}catch(e){}onState("end")}};
+  /* les voix de la leçon ne sont pas encore arrivées : on les attend un instant plutôt que de commencer avec une autre voix */
+  const pk=REC.P[REC.cur];
+  if(recOn()&&REC.cur&&navigator.onLine!==false&&!(pk&&pk.buf)){onState("line",1,lines.length);Promise.race([recLoad(REC.cur),new Promise(r=>setTimeout(r,9000))]).then(()=>{if(alive)next()})}
+  else next();
 }
 const itemAns=it=>it.k==="rf"?(it.a?"Richtig":"Falsch"):it.k==="ord"?(it.full||it.chips.join(it.join)):Array.isArray(it.a)?it.a[0]:it.a;
 function itemOk(it,a){
@@ -1829,7 +1865,7 @@ function practice(L,mode){
 }
 
 /* ---------- déroulé d'une série ---------- */
-function run(q,o){RUN=Object.assign({q,done:0,first:0,miss:0,acq:0,xp:0,combo:0,tot0:q.length},o);if(RUN.u)RUN.full0=pct(RUN.u.items)>=100;NAV.hidden=true;nextCard()}
+function run(q,o){try{const ls=[];(q||[]).forEach(c=>{const it=c&&(c.it||c.item||c),L=it&&it.L;if(L&&ls.indexOf(L)<0)ls.push(L)});ls.slice(0,8).forEach(L=>recLoad(L.id));const L0=(o&&(o.L||(o.u&&o.u.L)))||ls[0];if(L0)recCtx(L0)}catch(e){}RUN=Object.assign({q,done:0,first:0,miss:0,acq:0,xp:0,combo:0,tot0:q.length},o);if(RUN.u)RUN.full0=pct(RUN.u.items)>=100;NAV.hidden=true;nextCard()}
 function quit(){const b=RUN&&RUN.back||["home"];stopListening();hush();stopLines();save();go(b[0],b[1])}
 function topBar(){const p=RUN.done/(RUN.done+RUN.q.length+1)*100;const L=RUN.L||(RUN.u&&RUN.u.L);return`<div class="top" style="${L?L.css:""}"><button class="x" id="x" aria-label="Quitter">✕</button><div class="bar"><i style="width:${p}%"></i></div><span class="cnt">⭐ ${RUN.xp}</span></div>`}
 function later(card,gap){RUN.q.splice(Math.min(RUN.q.length,gap),0,card)}

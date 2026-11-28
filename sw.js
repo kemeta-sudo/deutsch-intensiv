@@ -1,4 +1,4 @@
-/* Deutsch Intensiv : fonctionnement hors ligne. Version 202611281443 */
+/* Deutsch Intensiv : fonctionnement hors ligne. Version 202611281607 */
 const V="deutsch-intensiv-v1";
 const AV="deutsch-intensiv-voix-v1"; /* les voix enregistrées : gardées d'une mise à jour à l'autre */
 const CORE=["./","index.html","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png"];

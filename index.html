@@ -184,7 +184,7 @@ input[type=number]{font:inherit;padding:8px;border-radius:8px;border:1px solid v
 .tirow .ti{margin-top:0;flex:1;min-width:0}
 .micb{flex:none;width:58px;border:2px solid var(--ln);border-radius:12px;background:var(--sf);font-size:22px;box-shadow:0 3px 0 var(--ln)}
 .micb.on{background:var(--nob);border-color:var(--no)}
-#toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:15px;max-width:86vw;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60}
+#toast{position:fixed;left:50%;top:calc(58px + env(safe-area-inset-top,0px));transform:translate(-50%,-14px);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:99px;font-size:15px;font-weight:600;max-width:88vw;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 [hidden]{display:none!important}
 html,body{max-width:100%;overflow-x:hidden}body{overflow-wrap:break-word}.card .de,.prompt,.ft .sol b,.opt,.heard,.auf li,.oc,.mo{overflow-wrap:anywhere}
@@ -232,6 +232,9 @@ textarea.ta{resize:vertical;min-height:64px;line-height:1.35;font-size:19px}
 .mb.pic{font-size:34px;line-height:1.15;padding:6px}
 .emo.sm{font-size:36px;vertical-align:middle}
 .warnbox{display:block;background:var(--nob);border:1px solid var(--no);border-radius:10px;padding:10px 12px;color:var(--ink);line-height:1.4}
+.hello{margin:8px 0 2px;color:var(--mu);font-size:15.5px}
+.goal.hit .gbar i{background:var(--ok)}
+.ft .sol .acq{color:var(--ok);font-weight:700}
 details.cor{padding:12px 14px;margin:10px 0}details.cor summary{display:flex;justify-content:space-between;gap:10px;cursor:pointer;font-family:var(--disp);font-size:18px}
 details.cor summary .good{color:var(--ok);font-weight:700}details.cor summary .bad{color:var(--no);font-weight:700}
 details.panel summary{cursor:pointer;font-weight:700}
@@ -312,6 +315,9 @@ const L1={
    match:[{t:"Relie chaque lettre à sa prononciation",say:"l",p:[["E","é"],["I","i"],["V","faou"],["W","vé"],["Z","tsèt"]]},{t:"Relie chaque lettre à sa prononciation",say:"l",p:[["G","gué"],["J","yot"],["C","tsé"],["H","ha"],["ß","ès-tsèt"]]},{t:"Relie chaque lettre à sa prononciation",say:"l",p:[["U","ou"],["Ü","u"],["Ö","eu"],["Ä","è"],["Q","kou"]]}]},
   {id:"ab",ic:"✍️",title:"Épeler et intonation",de:"Buchstabieren",
    memo:`<p>Tu n’as pas compris ? {Wie bitte?} Pour demander d’épeler : {Buchstabieren Sie bitte.} Pour épeler : {Ich buchstabiere:} K-E-L-L-E-R.</p><p>Intonation : la voix <b>descend ↘</b> dans une affirmation et dans une question en W. Elle <b>monte ↗</b> dans une relance comme {Und du?}</p>`},
+  {id:"ab2",ic:"🔡",title:"Épeler : ä, ö, ü, ß",de:"Buchstabieren: ä, ö, ü, ß",
+   memo:`<p>Les quatre lettres propres à l’allemand s’épellent aussi : {ä} · {ö} · {ü} · {ß}, qu’on appelle « Eszett ». Elles changent le mot : {schon} (déjà) n’est pas {schön} (beau).</p><p>Exemples : {Müller} · {Schröder} · {Jäger} · {Weiß} · {Straße} (rue) · {Übung} (exercice) · {schön} (beau) · {Grüße} (salutations) · {Mädchen} (fille).</p><p>Ces mots ne sont pas tous de cette leçon : ils servent à entraîner l’oreille et l’écriture. Les touches ä, ö, ü, ß sont toujours proposées sous la zone de réponse.</p>`,
+   say:[["schön","beau · ö se prononce « eu »"],["Übung","exercice · ü se prononce « u »"],["Straße","rue · ß se prononce « ss »"],["Mädchen","fille · ä se prononce « è »"],["Grüße","salutations · ü et ß"],["Müller","un nom de famille courant"]]},
   {id:"gr",ic:"👋",title:"Saluer et prendre congé",de:"Begrüßung und Abschied",
    memo:`<p><b>Arriver</b> : {Hallo} (familier) · {Guten Morgen} (matin) · {Guten Tag} (journée) · {Guten Abend} (soir).</p><p><b>Partir</b> : {Tschüs} (familier) · {Auf Wiedersehen} (formel) · {Gute Nacht} (avant de dormir).</p><p>Attention : {Guten Morgen}, {Guten Tag}, {Guten Abend}, mais {Gute Nacht}, sans n.</p><p>En Autriche et en Bavière on entend {Servus} et {Grüß Gott}, en Suisse {Grüezi}.</p>`,
    match:[{t:"Relie chaque moment à la bonne formule",say:"r",p:[["le matin","Guten Morgen"],["le soir, en arrivant","Guten Abend"],["avant de dormir","Gute Nacht"],["partir, formel","Auf Wiedersehen"],["partir, entre amis","Tschüs"]]}]},
@@ -473,6 +479,16 @@ const L1={
   {t:"sp",id:"n04",u:"ab",name:"Vogel"},
   {t:"sp",id:"n05",u:"ab",name:"Weber"},
   {t:"sp",id:"n06",u:"ab",name:"Zimmer"},
+  {t:"sp",id:"n07",u:"ab2",name:"Müller"},
+  {t:"sp",id:"n08",u:"ab2",name:"Schröder"},
+  {t:"sp",id:"n09",u:"ab2",name:"Jäger"},
+  {t:"sp",id:"n10",u:"ab2",name:"Weiß"},
+  {t:"sp",id:"n11",u:"ab2",name:"Straße",word:1},
+  {t:"sp",id:"n12",u:"ab2",name:"Übung",word:1},
+  {t:"sp",id:"n13",u:"ab2",name:"schön",word:1},
+  {t:"sp",id:"n14",u:"ab2",name:"Grüße",word:1},
+  {t:"sp",id:"n15",u:"ab2",name:"Mädchen",word:1},
+  {t:"sp",id:"n16",u:"ab2",name:"Köhler"},
   {t:"r",id:"i01",u:"ab",v:[{q:"Dans l’affirmation « Ich heiße Lena. », la voix…",a:"descend ↘",o:["monte ↗"]},{q:"« Ich komme aus Wien. » : la voix…",a:"descend ↘",o:["monte ↗"]}]},
   {t:"r",id:"i02",u:"ab",v:[{q:"Dans la question « Wie heißt du? », la voix…",a:"descend ↘",o:["monte ↗"],tip:"Contrairement au français, une question en W descend."},{q:"« Woher kommen Sie? » : la voix…",a:"descend ↘",o:["monte ↗"],tip:"Question en W → la voix descend."}]},
   {t:"r",id:"i03",u:"ab",v:[{q:"Dans la relance « Und du? », la voix…",a:"monte ↗",o:["descend ↘"]},{q:"« Gut, danke. Und Ihnen? » : sur « Und Ihnen? », la voix…",a:"monte ↗",o:["descend ↘"]}]}
@@ -521,7 +537,7 @@ const L1={
   {id:"r2",de:"Am Abend",text:["Frau Keller: Guten Abend, Herr Weber! Wie geht es Ihnen?","Herr Weber: Guten Abend, Frau Keller. Danke, es geht. Und Ihnen?","Frau Keller: Sehr gut, danke. Das ist Herr Nowak. Er kommt aus Österreich.","Herr Weber: Guten Abend, Herr Nowak. Ich komme aus Deutschland.","Herr Nowak: Auf Wiedersehen, Herr Weber. Gute Nacht, Frau Keller!"],
    tasks:[{k:"mc",q:"Was sagt Herr Weber?",a:"Es geht.",o:["Sehr gut.","Nicht so gut."]},{k:"rf",q:"Frau Keller geht es sehr gut.",a:true},{k:"mc",q:"Woher kommt Herr Nowak?",a:"Aus Österreich.",o:["Aus Deutschland.","Aus der Schweiz."]},{k:"rf",q:"Es ist Morgen.",a:false},{k:"fill",q:"Herr Weber kommt aus ___.",a:["Deutschland"]}]}
  ],
- spell:["Lena","Jonas","Keller","Brandt","Yilmaz","Nowak","Weber","Vogel","Jung","Zimmer"],
+ spell:["Lena","Jonas","Keller","Brandt","Yilmaz","Nowak","Weber","Vogel","Jung","Zimmer","Müller","Schröder","Jäger","Weiß","Straße","Übung","schön","Grüße","Mädchen","Köhler"],
  test:{minutes:15,sections:[
   {id:"w",name:"Wörter",fr:"vocabulaire",max:10,th:[6,8],parts:[{n:10,pool:[
     {k:"type",q:"Le matin : Guten ___!",a:"Morgen"},
@@ -960,8 +976,12 @@ async function initCloud(){
   }catch(e){cloud="local"}
 }
 function gain(x){
-  if(!x)return;const t=today();S.xp+=x;if(S.day.d!==t)S.day={d:t,x:0};S.day.x+=x;
-  if(S.streak.last!==t){S.streak.n=S.streak.last===t-1?S.streak.n+1:1;S.streak.last=t}
+  if(!x)return;const t=today();if(S.day.d!==t)S.day={d:t,x:0};const before=S.day.x;S.xp+=x;S.day.x+=x;
+  if(S.streak.last!==t){
+    const gap=S.streak.last?t-S.streak.last:0;S.streak.n=gap===1?S.streak.n+1:1;S.streak.last=t;const n=S.streak.n;
+    if([3,7,14,30,60,100].includes(n))toast(`🔥 ${n} jours d’affilée · Weiter so!`,"mile");else if(n>=2)toast(`🔥 ${n} jours d’affilée`);else if(gap>1)toast("Content de te revoir. On reprend !");
+  }
+  if(before<S.set.goal&&S.day.x>=S.set.goal)toast(`🎯 Objectif du jour atteint · ${S.set.goal} XP`,"goal");
   if(RUN)RUN.xp+=x;
 }
 const dayXp=()=>S.day.d===today()?S.day.x:0;
@@ -1000,9 +1020,12 @@ const SFX={
   near(){tone(0,494,.08,{type:"triangle",g:.16});tone(.1,494,.1,{type:"triangle",g:.16})},
   mic(){tone(0,660,.09,{g:.14,to:990})},
   done(){[523,659,784,1047].forEach((f,i)=>bell(i*.09,f,.2));[1047,1319,1568].forEach(f=>bell(.4,f,.7,.14))},
+  goal(){bell(0,659,.14);bell(.1,784,.14);bell(.2,1047,.42)},
+  mile(){[523,784,1047,1319].forEach((f,i)=>bell(i*.07,f,.16));tone(.34,2093,.3,{g:.05})},
+  lesson(){[392,523,659,784,1047].forEach((f,i)=>bell(i*.09,f,.2));[784,1047,1319].forEach(f=>bell(.5,f,.6,.13))},
   win(){[392,523,659,784].forEach((f,i)=>bell(i*.08,f,.18));[1047,1319,1568].forEach(f=>bell(.42,f,.5,.15));[1319,1568,2093].forEach((f,i)=>bell(.75+i*.09,f,.55,.12))}
 };
-const VIB={ok:[30],combo:[25,30,25],bad:[70,50,70],tap:[8],pair:[14],near:[20,30,20],mic:[15],done:[40,40,40,40,120],win:[40,40,40,40,40,40,160]};
+const VIB={ok:[30],combo:[25,30,25],bad:[70,50,70],tap:[8],pair:[14],near:[20,30,20],mic:[15],goal:[30,30,60],mile:[25,25,25,25,80],lesson:[40,40,40,40,40,140],done:[40,40,40,40,120],win:[40,40,40,40,40,40,160]};
 function sfx(k){
   if(!S.set.sfx)return;
   try{navigator.vibrate&&navigator.vibrate(VIB[k]||[10])}catch(e){}
@@ -1081,7 +1104,7 @@ const dueItems=()=>{const t=today();return LESSONS.flatMap(L=>L.items).filter(it
 const weakItems=()=>LESSONS.flatMap(L=>L.items).filter(it=>st(it).ko>0&&level(it)<3).sort((a,b)=>st(b).ko-st(a).ko);
 const gender=de=>/^der /.test(de)?"der":/^die /.test(de)?"die":/^das /.test(de)?"das":"";
 const deHtml=de=>{const g=gender(de);return g?`<span class="${g}">${g}</span> ${esc(de.slice(4))}`:esc(de)};
-const labelOf=it=>it.de||it.label||(it.name?"Nom épelé : "+it.name:it.a?it.c[0][0].replace("___",it.a).replace(/\s*\([^)]*\)/g,""):it.v[0].q);
+const labelOf=it=>it.de||it.label||(it.name?"Épelé : "+it.name:it.a?it.c[0][0].replace("___",it.a).replace(/\s*\([^)]*\)/g,""):it.v[0].q);
 const testPassed=L=>(S.tests[L.id]||[]).some(t=>t.pass);
 const testBest=L=>{const t=S.tests[L.id]||[];return t.length?t.reduce((b,x)=>x.tot>b.tot?x:b,t[0]):null};
 const ZW=["null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn"],TN=["","","zwanzig","dreißig","vierzig","fünfzig","sechzig","siebzig","achtzig","neunzig"];
@@ -1254,7 +1277,8 @@ const listenSent=it=>({kind:"mc",head:"Écoute et choisis la traduction",audio:i
 const typeSent=it=>({kind:"type",head:"Traduis en allemand",prompt:esc(it.fr),ans:it.de,lenient:true,sol:it,after:it.de});
 const dictEx=it=>({kind:"type",head:"Écoute et écris ce que tu entends",audio:it.de,ans:it.de,lenient:it.t==="s",sol:it});
 const seqEx=lines=>({deTiles:1,kind:"order",block:1,head:"Remets le dialogue dans l’ordre",tokens:lines,extra:[],sol:{de:lines.join(" – "),fr:""}});
-const spellEx=name=>({kind:"type",head:"Un nom est épelé. Écris-le.",audio:name.toUpperCase().split("").join(", ")+".",ans:name,lenient:true,sol:{de:name,fr:"Épelé : "+name.toUpperCase().split("").join(" – ")}});
+const letters=w=>[...w].map(ch=>ch==="ß"?"ß":ch.toUpperCase());
+const spellEx=name=>({kind:"type",head:"Un mot est épelé. Écris-le.",audio:letters(name).join(", ")+".",ans:name,lenient:true,sol:{de:name,fr:"Épelé : "+letters(name).join(" – ")}});
 function clozeEx(it,typed){
   const [de,fr]=pick(it.c),sol={de:de.replace("___",it.a).replace(/\s*\([^)]*\)/g,""),fr},pr=esc(de).replace("___",'<span class="bl">&nbsp;</span>');
   return typed?{kind:"type",head:"Complète",prompt:pr,sub:esc(fr),ans:it.a,lenient:/(^|[.!?–]\s+)___/.test(de),short:1,sol,tip:it.tip,after:sol.de}
@@ -1267,10 +1291,10 @@ function recEx(it,i){
 }
 const ABCMAP=Object.fromEntries(ABC);
 function spEx(it,typed){
-  const ls=it.name.toUpperCase().split(""),audio=ls.join(", ")+".",phon=ls.map(l=>ABCMAP[l]||l).join(" · "),sol={de:it.name,fr:"Épelé : "+ls.join(" – ")},au=audioOK();
-  if(typed)return au?{kind:"type",head:"Un nom est épelé. Écris-le.",audio,ans:it.name,lenient:true,sol}:{kind:"type",head:"Quel nom est épelé ? Écris-le.",prompt:esc(phon),small:1,ans:it.name,lenient:true,sol};
-  const o=shuffle((it.L.spell||[]).filter(x=>x!==it.name)).slice(0,3);
-  return au?{kind:"mc",head:"Un nom est épelé. Lequel ?",audio,ans:it.name,opts:[it.name,...o],sol}:{kind:"mc",head:"Quel nom est épelé ?",prompt:esc(phon),small:1,ans:it.name,opts:[it.name,...o],sol};
+  const ls=letters(it.name),what=it.word?"mot":"nom",audio=ls.join(", ")+".",phon=ls.map(l=>ABCMAP[l]||l).join(" · "),sol={de:it.name,fr:"Épelé : "+ls.join(" – ")},au=audioOK();
+  if(typed)return au?{kind:"type",head:`Un ${what} est épelé. Écris-le.`,audio,ans:it.name,lenient:true,sol}:{kind:"type",head:`Quel ${what} est épelé ? Écris-le.`,prompt:esc(phon),small:1,ans:it.name,lenient:true,sol};
+  const pool=(it.L.spell||[]).filter(x=>x!==it.name),near=pool.filter(x=>/[äöüßÄÖÜ]/.test(x)===/[äöüßÄÖÜ]/.test(it.name)),o=shuffle(near.length>=3?near:pool).slice(0,3);
+  return au?{kind:"mc",head:`Un ${what} est épelé. Lequel ?`,audio,ans:it.name,opts:[it.name,...o],sol}:{kind:"mc",head:`Quel ${what} est épelé ?`,prompt:esc(phon),small:1,ans:it.name,opts:[it.name,...o],sol};
 }
 /* ce qui peut être noté à l'oral : les phrases, les expressions et les mots assez longs pour être bien reconnus */
 const speakable=it=>it.t==="s"||(it.t==="w"&&!it.nd&&(()=>{const w=it.de.replace(/^(der|die|das) /,"");return/ /.test(w)||w.length>=5})());
@@ -1324,10 +1348,15 @@ const abcHtml=()=>`<div class="abc">${ABC.map(([l,p])=>`<button data-say="${l}."
 const listHtml=its=>{const l=its.filter(it=>it.de);return l.length?`<div class="panel" style="padding:6px 14px"><ul class="wl">${l.map(it=>`<li><span class="lv l${level(it)}" title="${LV[level(it)]}"></span><span class="de" data-say="${esc(it.de)}">${deHtml(it.de)}${it.pl?`<span class="mu sm" style="font-weight:400"> · ${esc(it.pl)}</span>`:""}</span><span class="fr">${esc(it.fr)}</span></li>`).join("")}</ul></div>`:""};
 
 /* ---------- Apprendre : niveau → module → leçons → unités ---------- */
+function hello(){
+  const h=new Date().getHours(),g=h<11?"Guten Morgen!":h<18?"Guten Tag!":"Guten Abend!",due=dueItems().length,dx=dayXp(),left=S.set.goal-dx;
+  return g+" "+(due?`${nb(due,"révision")} ${due>1?"t’attendent":"t’attend"}.`:dx>0&&left>0?`Plus que ${left} XP pour ton objectif du jour.`:dx>=S.set.goal?"Objectif du jour atteint, bravo !":S.xp?"Prêt pour une nouvelle série ?":"Bienvenue ! Commence par la leçon 1.");
+}
 function hudHtml(){
   const due=dueItems(),dx=dayXp();
   return`<div class="hud"><b>Deutsch Intensiv</b><span class="chips"><span class="chip" title="Jours d’affilée">🔥 ${streak()}</span><span class="chip ${S.xp>=100000?"big":""}" title="Points gagnés">⭐ ${fmtN(S.xp)} XP</span></span></div>
-  <div class="goal"><div class="gl"><span>Objectif du jour</span><span>${dx} / ${S.set.goal} XP</span></div><div class="gbar"><i style="width:${Math.min(100,dx/S.set.goal*100)}%"></i></div></div>
+  <p class="hello">${hello()}</p>
+  <div class="goal ${dx>=S.set.goal?"hit":""}"><div class="gl"><span>${dx>=S.set.goal?"🎯 Objectif du jour atteint":"Objectif du jour"}</span><span>${fmtN(dx)} / ${fmtN(S.set.goal)} XP</span></div><div class="gbar"><i style="width:${Math.min(100,dx/S.set.goal*100)}%"></i></div></div>
   ${INSTALL?`<button class="tile" id="inst"><span class="ic">📲</span><span><b>Installer l’application</b><small>Une icône sur l’écran d’accueil, en plein écran, utilisable hors ligne.</small></span></button>`:""}
   <button class="tile ${due.length?"hot":""}" id="rev" ${due.length?"":"disabled"}><span class="ic">🔁</span><span><b>${due.length?"Révisions du jour":"Aucune révision pour l’instant"}</b><small>${due.length?nb(due.length,"élément")+" à revoir avant de l’oublier":"Ce que tu as appris reviendra ici au bon moment."}</small></span></button>`;
 }
@@ -1489,7 +1518,9 @@ function help(){
 }
 /* touche Retour du téléphone : remonte d'un écran au lieu de fermer l'application */
 let backArm=0;
-function toast(t){let e=$("#toast");if(!e){e=document.createElement("div");e.id="toast";e.setAttribute("role","status");document.body.appendChild(e)}e.textContent=t;e.className="show";clearTimeout(toast.t);toast.t=setTimeout(()=>{e.className=""},2600)}
+const TQ=[];let tBusy=false;
+function toast(t,snd){TQ.push([t,snd]);if(!tBusy)tNext()}
+function tNext(){const x=TQ.shift();if(!x){tBusy=false;return}tBusy=true;let e=$("#toast");if(!e){e=document.createElement("div");e.id="toast";e.setAttribute("role","status");document.body.appendChild(e)}e.textContent=x[0];e.className="show";if(x[1])sfx(x[1]);setTimeout(()=>{e.className="";setTimeout(tNext,260)},2600)}
 function goBack(){
   if(RUN||T){
     if(Date.now()-backArm>2600){backArm=Date.now();toast(T?"Appuie encore sur Retour pour abandonner le test":"Appuie encore sur Retour pour quitter la série");return true}
@@ -1792,12 +1823,13 @@ function practice(L,mode){
 }
 
 /* ---------- déroulé d'une série ---------- */
-function run(q,o){RUN=Object.assign({q,done:0,first:0,miss:0,acq:0,xp:0,combo:0},o);if(RUN.u)RUN.full0=pct(RUN.u.items)>=100;NAV.hidden=true;nextCard()}
+function run(q,o){RUN=Object.assign({q,done:0,first:0,miss:0,acq:0,xp:0,combo:0,tot0:q.length},o);if(RUN.u)RUN.full0=pct(RUN.u.items)>=100;NAV.hidden=true;nextCard()}
 function quit(){const b=RUN&&RUN.back||["home"];stopListening();hush();stopLines();save();go(b[0],b[1])}
 function topBar(){const p=RUN.done/(RUN.done+RUN.q.length+1)*100;const L=RUN.L||(RUN.u&&RUN.u.L);return`<div class="top" style="${L?L.css:""}"><button class="x" id="x" aria-label="Quitter">✕</button><div class="bar"><i style="width:${p}%"></i></div><span class="cnt">⭐ ${RUN.xp}</span></div>`}
 function later(card,gap){RUN.q.splice(Math.min(RUN.q.length,gap),0,card)}
 function nextCard(){
   F.innerHTML="";stopListening();stopLines();if(!RUN.q.length)return endRun();
+  if(!RUN.half&&RUN.tot0>=10&&RUN.done>=RUN.tot0/2){RUN.half=1;toast("Déjà la moitié !")}
   const c=RUN.cur=RUN.q.shift();window.scrollTo(0,0);
   if(c.match)return showMatch(c);
   if(c.intro)return showIntro(c);
@@ -1857,8 +1889,8 @@ function showMatch(c){
     const l=side==="L"?b:sel.b,r=side==="R"?b:sel.b,li=+l.dataset.i,ri=+r.dataset.i;sel.b.classList.remove("sel");sel=null;
     if(m.p[li][1]===m.p[ri][1]){
       l.classList.add("ok");r.classList.add("ok");
-      /* paire juste : on entend l'allemand, même si le dernier mot touché était le français */
-      if(join)say(m.p[li][0]+" "+m.p[ri][1]);else if(!isDe&&(deL||deR))tts(deL?m.p[li][0]:m.p[ri][1]);
+      /* paire juste : seulement le son de réussite ; pronom et verbe sont relus ensemble */
+      if(join)say(m.p[li][0]+" "+m.p[ri][1]);
       if(++done===n)fin();else sfx("pair");
     }else{errs.add(li);[l,r].forEach(e=>{e.classList.remove("shake");void e.offsetWidth;e.classList.add("shake")});sfx("bad")}
   };
@@ -1888,10 +1920,11 @@ function showIntro(c){
   say(it.de);$("#x").onclick=quit;$("#ok").onclick=next;$("#ok").focus();
 }
 function feedback(ok,ex,cb){
-  const s=ex.sol||{},de=s.de||ex.ans,xp=ok?award(RUN.cur,ex):0;RUN.cur._xp=xp;sfx(ok?(RUN.combo>=2?"combo":"ok"):"bad");
-  const ttl=ok?(RUN.combo>=2?`${RUN.combo+1} d’affilée !`:pick(["Richtig!","Genau!","Sehr gut!","Stimmt!","Super!"])):"Pas encore";
+  const s=ex.sol||{},de=s.de||ex.ans,xp=ok?award(RUN.cur,ex):0;RUN.cur._xp=xp;const cc=RUN.cur,hard=ok&&!cc.again&&xpOf(ex)>=3,nrow=RUN.combo+1,mile=ok&&(nrow===5||nrow%10===0);sfx(ok?(mile||hard?"combo":"ok"):"bad");
+  const ci=cc.it,acqNow=ok&&RUN.kind==="unit"&&ci&&ci.L&&!cc.free&&!cc.rev&&st(ci).s>=2&&st(ci).s<3&&!(ci.t==="num"&&(st(ci).n||0)+1<(ci.need||1));
+  const ttl=!ok?(ex._near?"Presque !":"Pas encore"):cc.again?"Jetzt stimmt’s!":mile?`🔥 ${nrow} d’affilée · Weiter so!`:pick(hard?["Ausgezeichnet!","Perfekt!","Toll gemacht!"]:["Richtig!","Genau!","Stimmt!","Sehr gut!","Super!"]);
   F.innerHTML=`<div class="ft ${ok?"ok":"no"}" role="status"><div class="in"><div class="ttl"><span>${ttl}</span><span>${ex.score!=null?`Note : ${ex.score} %${xp?" · ":""}`:""}${xp?`+${xp} XP`:""}</span></div>
-  <div class="sol">${ok?"":`<span>Réponse attendue</span>`}<b>${ex.marks||(ex.block?esc(de):deHtml(de))}</b>${s.fr?`<span>${esc(s.fr)}</span>`:""}${!ok&&ex.tip?`<span>${esc(ex.tip)}</span>`:""}</div>
+  <div class="sol">${ok?"":`<span>Réponse attendue</span>`}<b>${ex.marks||(ex.block?esc(de):deHtml(de))}</b>${s.fr?`<span>${esc(s.fr)}</span>`:""}${!ok&&ex.tip?`<span>${esc(ex.tip)}</span>`:""}${ok&&cc.again?`<span>Tu l’as corrigé.</span>`:""}${acqNow?`<span class="acq">✓ Acquis</span>`:""}</div>
   <button class="btn ${ok?"ok":"no"}" id="nx">Continuer</button></div></div>`;
   const sp=ex.after||ex.speak||ex.audio||"";if(sp)setTimeout(()=>{if($("#nx"))say(sp)},420);
   $("#nx").onclick=()=>{RUN.done++;cb(ok);nextCard()};$("#nx").focus();
@@ -1938,7 +1971,7 @@ function showEx(ex,cb){
   $$(".keys button").forEach(b=>b.onclick=()=>{const s=ti.selectionStart??ti.value.length,e=ti.selectionEnd??s;ti.value=ti.value.slice(0,s)+b.dataset.k+ti.value.slice(e);ti.focus();ti.setSelectionRange(s+1,s+1);ck.disabled=false});
   const check=()=>{if(!ti.value.trim()||ti.disabled)return;const j=ex.judge?ex.judge(ti.value):ex.fr?(judgeFr(ti.value,ex.it)?"ok":"no"):judge(ti.value,ex.ans,ex.lenient||ti.dataset.voice==="1");
     if(j!=="ok"&&j!=="no"&&!retried){retried=true;sfx("near");$("#hint").innerHTML=`<p class="hint" role="alert">${NEAR[j]}</p>`;ti.classList.remove("shake");void ti.offsetWidth;ti.classList.add("shake");ti.focus();return}
-    ti.disabled=true;feedback(j==="ok",ex,cb)};
+    ti.disabled=true;ex._near=j!=="ok"&&j!=="no";feedback(j==="ok",ex,cb)};
   ck.onclick=check;ti.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();check()}};setTimeout(()=>ti.focus(),60);
 }
 /* prononciation : l'app écoute, transcrit, note et montre les mots reconnus ou non.
@@ -1962,12 +1995,12 @@ function showSpeak(it,done,opt){
     $("#skip").onclick=()=>{if(tries)return fin(best>=75);if(!RUN.pro)RUN.mute=true;fin(null)}; /* hors atelier : plus d'exercice parlé jusqu'à la fin de la série */
   };
   const result=heard=>{
-    const r=rate(heard,it.de),[t1,t2]=APPR(r.score);tries++;best=Math.max(best,r.score);
+    const r=rate(heard,it.de),[t1,t2]=APPR(r.score),was=Math.max(prev,best),rec=r.score>=75&&was>0&&r.score>was;tries++;best=Math.max(best,r.score);
     const ok=r.score>=75,pass=best>=75,more=!pass&&tries<3;sfx(ok?(r.score>=90?"combo":"ok"):"bad");
     $("#sde").innerHTML=r.marks.map(m=>`<span class="${m.c==="g"?"wg":m.c==="b"?"wb":""}">${esc(m.w)}</span>`).join(" ");
     $("#heard").textContent="Entendu : "+heard;
     if((opt.read||opt.show)&&!ok){const l=$("#lis");if(l)l.hidden=false;setTimeout(()=>{if(SPK===me)say(it.de)},600)}
-    F.innerHTML=`<div class="ft ${ok?"ok":"no"}" role="status"><div class="in"><div class="ttl"><span>${t1}</span><span>Note : ${r.score} %</span></div><div class="sol"><span>${t2}${!ok&&pass?` Ta meilleure note reste ${best} %.`:""}${!pass&&!more?" Elle reviendra un peu plus loin.":""}</span></div>
+    F.innerHTML=`<div class="ft ${ok?"ok":"no"}" role="status"><div class="in"><div class="ttl"><span>${t1}</span><span>Note : ${r.score} %</span></div><div class="sol"><span>${t2}${rec?` Nouveau record : ${r.score} %.`:""}${!ok&&pass?` Ta meilleure note reste ${best} %.`:""}${!pass&&!more?" Elle reviendra un peu plus loin.":""}</span></div>
     <button class="btn ${ok?"ok":"no"}" id="nx">${more?"🎤 Réessayer":"Continuer"}</button>${more?`<button class="link" id="skip" style="display:block;margin:4px auto 0">Continuer sans valider</button>`:pass&&best<90&&tries<3?`<button class="link" id="again" style="display:block;margin:4px auto 0">Réessayer pour une meilleure note</button>`:""}</div></div>`;
     $("#nx").onclick=more?begin:()=>fin(pass);if($("#skip"))$("#skip").onclick=()=>fin(false);if($("#again"))$("#again").onclick=begin;$("#nx").focus();
   };
@@ -1989,8 +2022,12 @@ function showSpeak(it,done,opt){
 }
 function endRun(){
   const r=RUN,n=r.first+r.miss,pc=n?Math.round(r.first/n*100):100,u=r.u,bonus=n>=5&&r.xp<5?5-r.xp:0;
-  if(bonus)gain(bonus);save();
+  if(bonus)gain(bonus);
+  const nW=LESSONS.reduce((a,L)=>a+L.items.filter(it=>it.t==="w"&&st(it).s>=3).length,0),mW=[50,100,250,500,750,1000].filter(x=>x<=nW).pop();
+  if(mW&&mW>(S.ms||0)){S.ms=mW;toast(`🏅 ${mW} mots acquis`,"mile")}
+  save();
   const left=u?u.items.filter(it=>st(it).s<3).length:0,full=u&&left===0,justFull=full&&r.kind==="unit"&&!r.full0;
+  S.ld=S.ld||{};const lessonDone=!!(justFull&&!S.ld[u.L.id]&&u.L.units.every(x=>acq(x.items)===x.items.length));if(lessonDone){S.ld[u.L.id]=1;save();setTimeout(()=>sfx("lesson"),900)}
   const nextU=u&&full?u.L.units.find(x=>x!==u&&x.items.some(it=>st(it).s<3)):null,due=dueItems().length,miss=r.missed||[];
   const pron=r.pron&&r.pron.length?Math.round(r.pron.reduce((a,b)=>a+b,0)/r.pron.length):null;
   if(justFull){confetti();sfx("win")}else sfx("done");
@@ -1999,15 +2036,17 @@ function endRun(){
   if(r.kind==="words"){const prod=W.filter(it=>!it.rec);
     mid=`<div class="panel"><h3>${wOkN(W)} sur ${W.length} ${tr?"phrases validées":"mots validés"} dans les deux sens</h3><p class="mu sm" style="margin:6px 0 0">Leçon ${r.L.n}. Allemand → français : ${W.filter(it=>st(it).f===1).length} sur ${W.length}. Français → allemand : ${prod.filter(it=>st(it).d===1).length} sur ${prod.length}.${todo.length?" Continue : l’application te posera le sens qui manque.":""}</p>
     <p class="mu sm" style="margin:10px 0 0">${miss.length?nb(miss.length,tr?"phrase":"mot")+" à revoir :":tr?"Aucune phrase ratée dans cette série.":"Aucun mot raté dans cette série."}</p>${miss.length?`<ul class="wl" style="margin-top:6px">${miss.map(c=>`<li><span class="lv" style="background:var(--no)"></span><span class="de" data-say="${esc(c.it.de)}" ${tr?'style="font-weight:400"':""}>${deHtml(c.it.de)}</span><span class="fr">${esc(c.it.fr)}</span></li>`).join("")}</ul>`:""}</div>`}
-  else if(u)mid=`<div class="panel"><div class="row">${ringHtml(pct(u.items),u.ic)}<div class="grow"><b style="font-family:var(--disp);font-size:19px">${esc(u.title)}</b><br><span class="mu sm">${full?"Tous les éléments sont acquis. Ils reviendront en révision à partir de demain.":`${acq(u.items)} sur ${u.items.length} acquis · encore ${nb(left,"élément")}`}</span></div></div></div>`;
+  else if(u)mid=`<div class="panel"><div class="row">${ringHtml(pct(u.items),u.ic)}<div class="grow"><b style="font-family:var(--disp);font-size:19px">${esc(u.title)}</b><br><span class="mu sm">${full?`Tous les éléments sont acquis. Ils reviendront en révision à partir de demain. ${u.L.units.filter(x=>acq(x.items)===x.items.length).length} unités sur ${u.L.units.length} terminées dans cette leçon.`:`${acq(u.items)} sur ${u.items.length} acquis · encore ${nb(left,"élément")}`}</span></div></div></div>`;
   if(pron!==null)mid+=`<div class="panel"><h3>Prononciation : ${pron} % en moyenne</h3><p class="mu sm" style="margin:6px 0 0">${nb(r.pron.length,"phrase notée","phrases notées")}. À partir de 75 %, la phrase est validée ; à partir de 90 %, elle est excellente.</p></div>`;
-  A.innerHTML=`<div class="res"><div class="em">${justFull?"🏆":pc>=80?"🎉":"💪"}</div><h1 style="margin-top:8px">${justFull?"Unité terminée !":r.kind==="review"?"Révisions faites":r.kind==="words"?(tr?"Phrases traduites":"Mots traduits"):r.kind==="practice"?"Atelier terminé":"Série terminée"}</h1><div class="xp">+${r.xp} XP</div>${bonus?`<p class="mu sm" style="margin:8px 0 0">Bravo pour cette révision : ce contenu est déjà acquis.</p>`:""}</div>
+  A.innerHTML=`<div class="res"><div class="em">${justFull?"🏆":pc>=80?"🎉":"💪"}</div><h1 style="margin-top:8px">${justFull?"Unité terminée !":pc===100&&n>=5?"Perfekt! Sans faute":pc>=80?"Sehr gut!":"Bien joué !"}</h1><p class="mu" style="margin:4px 0 0">${r.kind==="review"?"Révisions faites":r.kind==="words"?(tr?"Phrases traduites":"Mots traduits"):r.kind==="practice"?"Atelier terminé":"Série terminée"}${r.acq?" · "+nb(r.acq,"élément acquis","éléments acquis"):""}${pc<80?" · tes erreurs reviendront, c’est comme ça qu’on retient":""}</p><div class="xp">+${r.xp} XP</div>${bonus?`<p class="mu sm" style="margin:8px 0 0">Bravo pour cette révision : ce contenu est déjà acquis.</p>`:""}</div>
   <div class="stats"><div class="stat"><b>${n}</b><small>${r.kind==="words"?(tr?"phrases":"mots"):"exercices"}</small></div><div class="stat"><b>${pc} %</b><small>du premier coup</small></div><div class="stat"><b>🔥 ${streak()}</b><small>${streak()>1?"jours d’affilée":"jour d’affilée"}</small></div></div>${mid}
+  ${lessonDone?`<div class="panel" style="border-left:6px solid var(--sign)"><h3>🎓 Leçon ${u.L.n} terminée</h3><p class="mu sm" style="margin:6px 0 10px">Toutes les unités sont acquises. Tu peux maintenant passer le test de la leçon.</p><button class="btn" id="a6">Passer le test</button></div>`:""}
   ${r.kind==="unit"&&left?`<button class="btn" id="a1">Continuer l’unité</button>`:nextU?`<button class="btn" id="a2">Unité suivante : ${esc(nextU.title)}</button>`:r.kind==="review"&&due?`<button class="btn" id="a3">Continuer les révisions (${due})</button>`:r.kind==="words"&&miss.length?`<button class="btn" id="a4">Refaire ${tr?nb(miss.length,"phrase ratée","phrases ratées"):nb(miss.length,"mot raté","mots ratés")}</button>`:""}
   ${r.kind==="words"&&todo.length?`<button class="btn ${miss.length?"sec":""}" id="a5" style="margin-top:10px">Continuer : ${nb(todo.length,tr?"phrase":"mot")} à valider</button>`:""}
   <button class="btn sec" id="hm" style="margin-top:10px">Retour</button>`;
   F.innerHTML="";const back=r.back||["home"];RUN=null;
   if($("#a1"))$("#a1").onclick=()=>unitSession(u);if($("#a2"))$("#a2").onclick=()=>go("unit",nextU.key);if($("#a3"))$("#a3").onclick=reviewSession;
+  if($("#a6"))$("#a6").onclick=()=>testIntro(u.L,"full");
   if($("#a5"))$("#a5").onclick=()=>tr?tradSession(r.L,todo,"mix"):wordSession(r.L,todo,"mix");
   if($("#a4"))$("#a4").onclick=()=>run(shuffle(miss).map(c=>c.tdir?{it:c.it,tdir:c.tdir}:{it:c.it,wdir:c.wdir}),{kind:"words",bank:r.bank,L:r.L,title:r.title,back:r.back,missed:[]});
   $("#hm").onclick=()=>go(back[0]==="unit"?"home":back[0],back[1]);
@@ -2108,7 +2147,7 @@ function finishTest(){
   if(full)(S.tests[L.id]=S.tests[L.id]||[]).push({d:today(),tot,max,pass,sc});
   const auf=T.auf,ans=T.ans;T=null;gain(xp);save();F.innerHTML="";window.scrollTo(0,0);
   if(pass){confetti();sfx("win")}else sfx("done");
-  A.innerHTML=`<div class="res"><div class="em">${pass?"🏆":"💪"}</div><h1 style="margin-top:8px">${tot} / ${max}</h1><p class="mu" style="margin-top:6px">${full?(pass?"Test réussi : toutes les parties sont au vert.":"Pas encore validé : il faut toutes les parties au vert."):(pass?"Très bon entraînement : tu es prêt pour le test de la leçon.":"Entraînement terminé : revois les parties en jaune ou en rouge.")}</p>${xp?`<div class="xp">+${xp} XP</div>`:""}</div>
+  A.innerHTML=`<div class="res"><div class="em">${pass?"🏆":"💪"}</div><h1 style="margin-top:8px">${tot} / ${max}</h1><p class="mu" style="margin-top:6px">${full?(pass?"Glückwunsch! Test réussi : toutes les parties sont au vert.":"Pas encore validé. Il te manque "+secs.filter(x=>x.c!=="g").map(x=>nb(Math.ceil(x.m*.8)-x.v,"point")+" en "+SECN[x.s]).join(", ")+"."):(pass?"Très bon entraînement : tu es prêt pour le test de la leçon.":"Entraînement terminé : revois les parties en jaune ou en rouge.")}</p>${xp?`<div class="xp">+${xp} XP</div>`:""}</div>
   <div class="lights">${secs.map(x=>`<div class="light"><i class="${x.c}"></i><b>${SECN[x.s]} <span class="mu" style="font-size:15px;font-weight:500">${x.c==="g"?"acquis":x.c==="y"?"à consolider":"à retravailler"}</span></b><span>${x.v} / ${x.m}</span></div>`).join("")}</div>
   <h3 style="margin:18px 0 0">Correction</h3><p class="mu sm" style="margin:4px 0 0">Touche un exercice pour le voir corrigé. La bonne réponse suit la flèche.</p>
   ${auf.map((A_,i)=>{const [p,m]=aufScore(A_,ans[i]);return`<details class="panel cor"><summary><b>${SECN[A_.sec]} · Aufgabe ${i+1}</b><span class="${p===m?"good":"bad"}">${p} / ${m}</span></summary>${aufRender(A_,ans[i],true).replace(/<div class="player">[\s\S]*?<\/div>/,"").replace(/<button class="pl1"[^>]*>[^<]*<\/button> /g,"")}</details>`}).join("")}

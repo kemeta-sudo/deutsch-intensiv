@@ -316,6 +316,9 @@ const L1={
   {id:"ab",ic:"✍️",title:"Épeler",de:"Buchstabieren",
    memo:`<p>Tu n’as pas compris ? {Wie bitte?} Pour demander d’épeler : {Buchstabieren Sie bitte.} Pour épeler : {Ich buchstabiere:} K-E-L-L-E-R.</p><p>Les quatre lettres propres à l’allemand s’épellent aussi : {ä} · {ö} · {ü} · {ß}, qu’on appelle « Eszett ». Elles changent le mot : {schon} (déjà) n’est pas {schön} (beau).</p><p>Exemples : {Müller} · {Schröder} · {Jäger} · {Weiß} · {Straße} (rue) · {Übung} (exercice) · {Grüße} (salutations) · {Mädchen} (fille). Ces mots ne sont pas tous de cette leçon : ils servent à entraîner l’oreille et l’écriture.</p>`,
    say:[["schön","beau · ö se prononce « eu »"],["Übung","exercice · ü se prononce « u »"],["Straße","rue · ß se prononce « ss »"],["Mädchen","fille · ä se prononce « è »"],["Grüße","salutations · ü et ß"],["Müller","un nom de famille courant"]]},
+  {id:"in",ic:"🎵",title:"L’intonation",de:"Satzmelodie",
+   memo:`<p>En allemand, la voix <b>descend ↘</b> à la fin d’une affirmation : {Ich heiße Lena.} Elle descend aussi dans une question en W, contrairement au français : {Wie heißt du?} · {Woher kommen Sie?}</p><p>La voix <b>monte ↗</b> dans une relance : {Und du?} · {Und Ihnen?} Elle monte aussi dans une question à laquelle on répond par oui ou non : {Kommst du aus Wien?}</p><p>Écoute ces exemples en touchant les mots, puis répète-les à voix haute.</p>`,
+   say:[["Wie heißt du?","question en W : la voix descend"],["Und du?","relance : la voix monte"],["Woher kommen Sie?","question en W : la voix descend"],["Und Ihnen?","relance : la voix monte"]]},
   {id:"gr",ic:"👋",title:"Saluer et prendre congé",de:"Begrüßung und Abschied",
    memo:`<p><b>Arriver</b> : {Hallo} (familier) · {Guten Morgen} (matin) · {Guten Tag} (journée) · {Guten Abend} (soir).</p><p><b>Partir</b> : {Tschüs} (familier) · {Auf Wiedersehen} (formel) · {Gute Nacht} (avant de dormir).</p><p>Attention : {Guten Morgen}, {Guten Tag}, {Guten Abend}, mais {Gute Nacht}, sans n.</p><p>En Autriche et en Bavière on entend {Servus} et {Grüß Gott}, en Suisse {Grüezi}.</p>`,
    match:[{t:"Relie chaque moment à la bonne formule",say:"r",p:[["le matin","Guten Morgen"],["le soir, en arrivant","Guten Abend"],["avant de dormir","Gute Nacht"],["partir, formel","Auf Wiedersehen"],["partir, entre amis","Tschüs"]]}]},
@@ -335,10 +338,7 @@ const L1={
    match:[{t:"kommen : relie le pronom à sa forme",say:"lrj",p:[["ich","komme"],["du","kommst"],["er","kommt"],["Sie","kommen"]]},{t:"sein : relie le pronom à sa forme",say:"lrj",p:[["ich","bin"],["du","bist"],["er","ist"],["Sie","sind"]]},{t:"heißen : relie le pronom à sa forme",say:"lrj",p:[["ich","heiße"],["du","heißt"],["sie (elle)","heißt"],["Sie (vous)","heißen"]]}]},
   {id:"be",ic:"🙂",title:"Demander des nouvelles",de:"Wie geht’s?",
    memo:`<p>{Wie geht’s?} (familier) · {Wie geht es dir?} (du) · {Wie geht es Ihnen?} (Sie)</p><p>😀 {sehr gut} · 🙂 {gut} · 😐 {es geht} · 🙁 {nicht so gut}</p><p>On renvoie la question : {Gut, danke.} {Und dir?} / {Und Ihnen?} – {Auch gut.}</p>`,
-   match:[{t:"Relie chaque humeur à la réponse",say:"r",p:[["😀","sehr gut"],["🙂","gut"],["😐","es geht"],["🙁","nicht so gut"]]}]},
-  {id:"in",ic:"🎵",title:"L’intonation",de:"Satzmelodie",
-   memo:`<p>En allemand, la voix <b>descend ↘</b> à la fin d’une affirmation : {Ich heiße Lena.} Elle descend aussi dans une question en W, contrairement au français : {Wie heißt du?} · {Woher kommen Sie?}</p><p>La voix <b>monte ↗</b> dans une relance : {Und du?} · {Und Ihnen?} Elle monte aussi dans une question à laquelle on répond par oui ou non : {Kommst du aus Wien?}</p><p>Écoute ces exemples en touchant les mots, puis répète-les à voix haute.</p>`,
-   say:[["Wie heißt du?","question en W : la voix descend"],["Und du?","relance : la voix monte"],["Woher kommen Sie?","question en W : la voix descend"],["Und Ihnen?","relance : la voix monte"]]}
+   match:[{t:"Relie chaque humeur à la réponse",say:"r",p:[["😀","sehr gut"],["🙂","gut"],["😐","es geht"],["🙁","nicht so gut"]]}]}
  ],
  items:[
   // --- saluer
